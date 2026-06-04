@@ -75,6 +75,10 @@
   .cart-item-price{font-size:13px;color:var(--muted);margin-top:2px;}
   .btn-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px;transition:color 0.2s;}
   .btn-remove:hover{color:#f87171;}
+  .qty-controls{display:flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:2px 4px;}
+  .qty-btn{background:none;border:none;color:var(--muted);width:24px;height:24px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:color 0.2s;border-radius:5px;font-family:inherit;line-height:1;}
+  .qty-btn:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+  .qty-num{font-family:'Space Mono',monospace;font-size:13px;color:var(--text);min-width:18px;text-align:center;}
   .cart-total{margin-top:24px;padding:16px;background:var(--surface2);border-radius:12px;display:flex;justify-content:space-between;align-items:center;}
   .total-label{font-size:14px;color:var(--muted);}
   .total-num{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;}
@@ -222,21 +226,36 @@ function filterProducts(cat,el) {
 
 function addToCart(id) {
   const p=products.find(x=>x.id===id||x.name===id);
-  if(!p||cart.find(c=>c.id===p.id)) return;
-  cart.push(p); updateCartCount(); renderProducts(currentFilter);
+  if(!p) return;
+  const existing=cart.find(c=>c.id===p.id);
+  if(existing){existing.qty=(existing.qty||1)+1;}
+  else{cart.push({...p,qty:1});}
+  updateCartCount(); renderProducts(currentFilter);
   showToast(`✓ تم إضافة ${p.name} للسلة`);
 }
 function removeFromCart(id){cart=cart.filter(c=>c.id!==id);updateCartCount();renderCartItems();renderProducts(currentFilter);}
-function updateCartCount(){document.getElementById('cart-count').textContent=cart.length;}
+function updateQty(id,delta){
+  const item=cart.find(c=>c.id===id);
+  if(!item) return;
+  item.qty=(item.qty||1)+delta;
+  if(item.qty<=0){cart=cart.filter(c=>c.id!==id);}
+  updateCartCount();renderCartItems();renderProducts(currentFilter);
+}
+function updateCartCount(){const total=cart.reduce((s,p)=>s+(p.qty||1),0);document.getElementById('cart-count').textContent=total;}
 
 function renderCartItems() {
   const el=document.getElementById('cart-items');
   if(!cart.length){el.innerHTML='<div class="empty-cart"><div>🛒</div>سلتك فارغة</div>';return;}
-  const total=cart.reduce((s,p)=>s+p.price,0);
+  const total=cart.reduce((s,p)=>s+(p.price*(p.qty||1)),0);
   el.innerHTML=cart.map(p=>`
     <div class="cart-item">
       <div class="cart-item-icon">${p.icon}</div>
-      <div class="cart-item-info"><div class="cart-item-name">${p.name}</div><div class="cart-item-price">${p.price} ر.س${p.period}</div></div>
+      <div class="cart-item-info"><div class="cart-item-name">${p.name}</div><div class="cart-item-price">${p.price*(p.qty||1)} ر.س${p.period}</div></div>
+      <div class="qty-controls">
+        <button class="qty-btn" onclick="updateQty(${p.id},-1)">−</button>
+        <span class="qty-num">${p.qty||1}</span>
+        <button class="qty-btn" onclick="updateQty(${p.id},1)">+</button>
+      </div>
       <button class="btn-remove" onclick="removeFromCart(${p.id})">✕</button>
     </div>`).join('')+`
     <div class="cart-total"><div class="total-label">الإجمالي الشهري</div><div class="total-num">${total} ر.س</div></div>
@@ -246,7 +265,11 @@ function renderCartItems() {
 function openCart(){document.getElementById('cart-overlay').classList.add('open');renderCartItems();}
 function closeCart(){document.getElementById('cart-overlay').classList.remove('open');}
 function closeCartOnOverlay(e){if(e.target===document.getElementById('cart-overlay'))closeCart();}
-function checkout(){showToast('🎉 شكراً! سيتم تأكيد طلبك قريباً');closeCart();}
+function checkout(){
+  if(!cart.length) return;
+  localStorage.setItem('dz_cart', JSON.stringify(cart));
+  window.location.href='/checkout.html';
+}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
 // Netlify Identity redirect after login
