@@ -1,0 +1,75 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+locale: ar
+
+collections:
+  - name: "products"
+    label: "المنتجات"
+    label_singular: "منتج"
+    folder: "_data/products"
+    create: true
+    slug: "{{slug}}"
+    format: json
+    fields:
+      - {label: "اسم المنتج", name: "name", widget: "string"}
+      - {label: "الأيقونة (إيموجي)", name: "icon", widget: "string", default: "📦"}
+      - label: "الفئة"
+        name: "category"
+        widget: "relation"
+        collection: "categories"
+        search_fields: ["label"]
+        value_field: "id"
+        display_fields: ["icon", "label"]
+      - {label: "السعر (ر.س)", name: "price", widget: "number", value_type: "int"}
+      - {label: "الفترة", name: "period", widget: "string", default: "/شهر"}
+      - {label: "الوصف", name: "desc", widget: "text"}
+      - label: "الشارة"
+        name: "badge"
+        widget: "select"
+        options:
+          - {label: "بدون", value: ""}
+          - {label: "🔥 رائج", value: "hot"}
+          - {label: "✦ جديد", value: "new"}
+        default: ""
+      - {label: "لون الخلفية (hex)", name: "color", widget: "color", default: "#0f0f0f"}
+      - label: "المميزات"
+        name: "features"
+        widget: "list"
+        field: {label: "ميزة", name: "feature", widget: "string"}
+
+  - name: "categories"
+    label: "الفئات"
+    label_singular: "فئة"
+    folder: "_data/categories"
+    create: true
+    slug: "{{id}}"
+    format: json
+    fields:
+      - {label: "المعرّف (بالإنجليزي)", name: "id", widget: "string", hint: "مثل: streaming أو gaming"}
+      - {label: "الاسم بالعربي", name: "label", widget: "string"}
+      - {label: "الأيقونة", name: "icon", widget: "string", default: "📦"}
+
+  - name: "settings"
+    label: "إعدادات الموقع"
+    files:
+      - label: "الإعدادات العامة"
+        name: "general"
+        file: "_data/settings.json"
+        fields:
+          - {label: "اسم المتجر", name: "site_name", widget: "string"}
+          - {label: "الوصف المختصر", name: "site_tagline", widget: "string"}
+          - {label: "عنوان الهيرو", name: "hero_title", widget: "string"}
+          - {label: "نص الهيرو", name: "hero_subtitle", widget: "text"}
+          - {label: "إحصائية 1 - رقم", name: "stat1_num", widget: "string"}
+          - {label: "إحصائية 1 - تسمية", name: "stat1_label", widget: "string"}
+          - {label: "إحصائية 2 - رقم", name: "stat2_num", widget: "string"}
+          - {label: "إحصائية 2 - تسمية", name: "stat2_label", widget: "string"}
+          - {label: "إحصائية 3 - رقم", name: "stat3_num", widget: "string"}
+          - {label: "إحصائية 3 - تسمية", name: "stat3_label", widget: "string"}
+          - {label: "لون الموقع الرئيسي", name: "accent_color", widget: "color"}
+          - {label: "نص الفوتر", name: "footer_text", widget: "string"}

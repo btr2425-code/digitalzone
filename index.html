@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigitalZone — متجر الاشتراكات الرقمية</title>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080b12; --surface:#0f1420; --surface2:#161c2e;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --accent:#3b82f6; --accent2:#6366f1;
+    --text:#f0f2f8; --muted:#7a82a0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-family:'Space Mono',monospace;font-size:18px;color:var(--text);}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--text);}
+  .btn-cart{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:8px 16px;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
+  .btn-cart:hover{background:var(--surface);}
+  .cart-count{background:var(--accent);color:white;border-radius:50%;width:18px;height:18px;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;}
+
+  .hero{padding:80px 2rem 60px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(59,130,246,0.12) 0%,transparent 70%);pointer-events:none;}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:20px;padding:5px 14px;font-size:12px;color:#93c5fd;margin-bottom:24px;}
+  .hero h1{font-size:clamp(32px,5vw,56px);font-weight:700;line-height:1.15;margin-bottom:16px;letter-spacing:-1px;}
+  .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .hero p{color:var(--muted);font-size:17px;max-width:480px;margin:0 auto 32px;line-height:1.7;}
+  .hero-stats{display:flex;justify-content:center;gap:48px;margin-top:40px;padding-top:40px;border-top:1px solid var(--border);}
+  .stat-num{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;}
+  .stat-lbl{font-size:13px;color:var(--muted);margin-top:4px;}
+
+  .filters{padding:0 2rem 32px;display:flex;gap:8px;flex-wrap:wrap;}
+  .filter-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+  .filter-btn:hover{border-color:var(--border2);color:var(--text);}
+  .filter-btn.active{background:var(--accent);border-color:var(--accent);color:white;}
+
+  .products-grid{padding:0 2rem 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+  .product-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;animation:fadeUp 0.4s ease both;}
+  .product-card:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .card-header{height:140px;display:flex;align-items:center;justify-content:center;position:relative;font-size:52px;}
+  .badge-hot{position:absolute;top:12px;right:12px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
+  .badge-new{position:absolute;top:12px;right:12px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#4ade80;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
+  .card-body{padding:18px 20px 20px;}
+  .card-category{font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+  .card-name{font-size:18px;font-weight:600;margin-bottom:8px;}
+  .card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .price{display:flex;align-items:baseline;gap:4px;}
+  .price-num{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;}
+  .price-period{font-size:12px;color:var(--muted);}
+  .btn-add{background:var(--accent);color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.2s;}
+  .btn-add:hover{background:#2563eb;transform:scale(1.03);}
+  .btn-add.added{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3);}
+  .card-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+  .feature-tag{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:3px 10px;border-radius:20px;}
+
+  .cart-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);}
+  .cart-overlay.open{display:flex;}
+  .cart-panel{background:var(--surface);border-left:1px solid var(--border2);width:380px;max-width:100vw;height:100vh;overflow-y:auto;padding:24px;animation:slideIn 0.3s ease;margin-right:auto;}
+  @keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+  .cart-title{font-size:20px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;}
+  .btn-close{background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;font-family:inherit;}
+  .cart-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);}
+  .cart-item-icon{font-size:28px;}
+  .cart-item-info{flex:1;}
+  .cart-item-name{font-size:14px;font-weight:500;}
+  .cart-item-price{font-size:13px;color:var(--muted);margin-top:2px;}
+  .btn-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px;transition:color 0.2s;}
+  .btn-remove:hover{color:#f87171;}
+  .cart-total{margin-top:24px;padding:16px;background:var(--surface2);border-radius:12px;display:flex;justify-content:space-between;align-items:center;}
+  .total-label{font-size:14px;color:var(--muted);}
+  .total-num{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;}
+  .btn-checkout{width:100%;margin-top:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
+  .empty-cart{text-align:center;padding:60px 0;color:var(--muted);font-size:14px;}
+  .empty-cart div{font-size:48px;margin-bottom:16px;}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:12px 20px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s ease;white-space:nowrap;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+
+  .loading{text-align:center;padding:80px;color:var(--muted);}
+  footer{border-top:1px solid var(--border);padding:32px 2rem;text-align:center;color:var(--muted);font-size:13px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Digital<span>Zone</span></div>
+  <ul class="nav-links">
+    <li><a href="#">المتجر</a></li>
+    <li><a href="#">الباقات</a></li>
+    <li><a href="/admin">⚙️ الإدارة</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <button class="btn-cart" onclick="openCart()">🛒 سلتي <div class="cart-count" id="cart-count">0</div></button>
+  </div>
+</nav>
+
+<section class="hero" id="hero-section">
+  <div class="hero-badge">✦ أفضل الأسعار مضمونة</div>
+  <h1 id="hero-title">اشتراكاتك الرقمية<br>في مكان <em>واحد</em></h1>
+  <p id="hero-subtitle">نتفليكس، سبوتيفاي، أدوبي، وأكثر — احصل على اشتراكك فوراً بأفضل الأسعار</p>
+  <div class="hero-stats">
+    <div><div class="stat-num" id="s1n">+50</div><div class="stat-lbl" id="s1l">منتج رقمي</div></div>
+    <div><div class="stat-num" id="s2n">24/7</div><div class="stat-lbl" id="s2l">دعم فوري</div></div>
+    <div><div class="stat-num" id="s3n">99%</div><div class="stat-lbl" id="s3l">رضا العملاء</div></div>
+  </div>
+</section>
+
+<div class="filters" id="filters-bar">
+  <button class="filter-btn active" onclick="filterProducts('all',this)">الكل</button>
+</div>
+
+<div class="products-grid" id="products-grid">
+  <div class="loading">⏳ جاري تحميل المنتجات...</div>
+</div>
+
+<div class="cart-overlay" id="cart-overlay" onclick="closeCartOnOverlay(event)">
+  <div class="cart-panel">
+    <div class="cart-title">سلة المشتريات <button class="btn-close" onclick="closeCart()">✕</button></div>
+    <div id="cart-items"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<footer><span id="footer-text">© 2025 DigitalZone — جميع الحقوق محفوظة</span></footer>
+
+<script>
+let products = [];
+let categories = [];
+let cart = [];
+let currentFilter = 'all';
+
+async function loadData() {
+  try {
+    const [pRes, cRes, sRes] = await Promise.all([
+      fetch('/_data/products.json'),
+      fetch('/_data/categories.json'),
+      fetch('/_data/settings.json')
+    ]);
+    products = await pRes.json();
+    categories = await cRes.json();
+    const settings = await sRes.json();
+    applySettings(settings);
+    renderFilters();
+    renderProducts('all');
+  } catch(e) {
+    // fallback: use embedded data if fetch fails (local preview)
+    products = FALLBACK_PRODUCTS;
+    categories = FALLBACK_CATS;
+    renderFilters();
+    renderProducts('all');
+  }
+}
+
+function applySettings(s) {
+  if(s.site_name) document.title = s.site_name + ' — ' + (s.site_tagline||'');
+  if(s.hero_title) document.getElementById('hero-title').innerHTML = s.hero_title.replace('واحد','<em>واحد</em>');
+  if(s.hero_subtitle) document.getElementById('hero-subtitle').textContent = s.hero_subtitle;
+  if(s.stat1_num) document.getElementById('s1n').textContent = s.stat1_num;
+  if(s.stat1_label) document.getElementById('s1l').textContent = s.stat1_label;
+  if(s.stat2_num) document.getElementById('s2n').textContent = s.stat2_num;
+  if(s.stat2_label) document.getElementById('s2l').textContent = s.stat2_label;
+  if(s.stat3_num) document.getElementById('s3n').textContent = s.stat3_num;
+  if(s.stat3_label) document.getElementById('s3l').textContent = s.stat3_label;
+  if(s.footer_text) document.getElementById('footer-text').textContent = s.footer_text;
+  if(s.accent_color) document.documentElement.style.setProperty('--accent', s.accent_color);
+}
+
+function renderFilters() {
+  const bar = document.getElementById('filters-bar');
+  bar.innerHTML = `<button class="filter-btn active" onclick="filterProducts('all',this)">الكل</button>` +
+    categories.map(c =>
+      `<button class="filter-btn" onclick="filterProducts('${c.id}',this)">${c.icon} ${c.label}</button>`
+    ).join('');
+}
+
+function renderProducts(filter='all') {
+  const grid = document.getElementById('products-grid');
+  const filtered = filter==='all' ? products : products.filter(p=>p.category===filter);
+  if(!filtered.length){grid.innerHTML='<div class="loading">لا توجد منتجات في هذه الفئة</div>';return;}
+  grid.innerHTML = filtered.map((p,i) => `
+    <div class="product-card" style="animation-delay:${i*0.06}s">
+      <div class="card-header" style="background:radial-gradient(ellipse at center,${p.color||'#0f0f0f'} 0%,#080b12 100%)">
+        ${p.icon||'📦'}
+        ${p.badge==='hot'?'<div class="badge-hot">🔥 رائج</div>':''}
+        ${p.badge==='new'?'<div class="badge-new">✦ جديد</div>':''}
+      </div>
+      <div class="card-body">
+        <div class="card-category">${getCategoryLabel(p.category)}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc||''}</div>
+        <div class="card-features">${(p.features||[]).map(f=>`<div class="feature-tag">✓ ${f}</div>`).join('')}</div>
+        <div class="card-footer">
+          <div class="price"><div class="price-num">${p.price} ر.س</div><div class="price-period">${p.period||'/شهر'}</div></div>
+          <button class="btn-add ${cart.find(c=>c.id===p.id)?'added':''}" onclick="addToCart(${p.id||JSON.stringify(p.name)})">
+            ${cart.find(c=>c.id===p.id)?'✓ مضاف':'+ أضف'}
+          </button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function getCategoryLabel(catId) {
+  const c = categories.find(x=>x.id===catId);
+  return c ? `${c.icon} ${c.label}` : catId;
+}
+
+function filterProducts(cat,el) {
+  currentFilter=cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts(cat);
+}
+
+function addToCart(id) {
+  const p=products.find(x=>x.id===id||x.name===id);
+  if(!p||cart.find(c=>c.id===p.id)) return;
+  cart.push(p); updateCartCount(); renderProducts(currentFilter);
+  showToast(`✓ تم إضافة ${p.name} للسلة`);
+}
+function removeFromCart(id){cart=cart.filter(c=>c.id!==id);updateCartCount();renderCartItems();renderProducts(currentFilter);}
+function updateCartCount(){document.getElementById('cart-count').textContent=cart.length;}
+
+function renderCartItems() {
+  const el=document.getElementById('cart-items');
+  if(!cart.length){el.innerHTML='<div class="empty-cart"><div>🛒</div>سلتك فارغة</div>';return;}
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  el.innerHTML=cart.map(p=>`
+    <div class="cart-item">
+      <div class="cart-item-icon">${p.icon}</div>
+      <div class="cart-item-info"><div class="cart-item-name">${p.name}</div><div class="cart-item-price">${p.price} ر.س${p.period}</div></div>
+      <button class="btn-remove" onclick="removeFromCart(${p.id})">✕</button>
+    </div>`).join('')+`
+    <div class="cart-total"><div class="total-label">الإجمالي الشهري</div><div class="total-num">${total} ر.س</div></div>
+    <button class="btn-checkout" onclick="checkout()">إتمام الشراء →</button>`;
+}
+
+function openCart(){document.getElementById('cart-overlay').classList.add('open');renderCartItems();}
+function closeCart(){document.getElementById('cart-overlay').classList.remove('open');}
+function closeCartOnOverlay(e){if(e.target===document.getElementById('cart-overlay'))closeCart();}
+function checkout(){showToast('🎉 شكراً! سيتم تأكيد طلبك قريباً');closeCart();}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+// Netlify Identity redirect after login
+if(window.netlifyIdentity){
+  window.netlifyIdentity.on('init', user=>{if(!user){window.netlifyIdentity.on('login',()=>{document.location.href='/admin/';})}});
+}
+
+// Fallback data for local preview
+const FALLBACK_PRODUCTS = [
+  {id:1,name:'Netflix',category:'streaming',icon:'🎬',color:'#1a0a0a',badge:'hot',price:29,period:'/شهر',desc:'أفلام ومسلسلات بلا حدود بجودة 4K',features:['4K Ultra HD','4 شاشات','تحميل للجوال']},
+  {id:2,name:'Spotify Premium',category:'music',icon:'🎵',color:'#0a1a0a',badge:'',price:19,period:'/شهر',desc:'موسيقى وبودكاست بدون إعلانات',features:['بدون إعلانات','تحميل أغاني','صوت عالي الجودة']},
+  {id:3,name:'Xbox Game Pass',category:'gaming',icon:'🎮',color:'#0a1a0a',badge:'hot',price:45,period:'/شهر',desc:'مئات الألعاب الأخيرة',features:['+100 لعبة','EA Play مجاناً']},
+];
+const FALLBACK_CATS = [
+  {id:'streaming',label:'مشاهدة',icon:'📺'},
+  {id:'music',label:'موسيقى',icon:'🎵'},
+  {id:'gaming',label:'ألعاب',icon:'🎮'},
+];
+
+loadData();
+</script>
+</body>
+</html>

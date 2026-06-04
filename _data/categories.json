@@ -1,0 +1,7 @@
+[
+  {"id":"streaming","label":"مشاهدة","icon":"📺"},
+  {"id":"music","label":"موسيقى","icon":"🎵"},
+  {"id":"creative","label":"إبداع","icon":"🎨"},
+  {"id":"productivity","label":"إنتاجية","icon":"💼"},
+  {"id":"gaming","label":"ألعاب","icon":"🎮"}
+]
