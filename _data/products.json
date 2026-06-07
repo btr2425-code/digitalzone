@@ -10,5 +10,7 @@
   {"id":9,"name":"Apple TV+","category":"streaming","icon":"🍎","color":"#0f0f0f","badge":"","price":21,"period":"/شهر","desc":"مسلسلات وأفلام أصلية من إنتاج Apple","features":["4K Dolby Vision","6 مستخدمين","تجربة مجانية"]},
   {"id":10,"name":"Duolingo Plus","category":"productivity","icon":"🦜","color":"#0a1a05","badge":"","price":15,"period":"/شهر","desc":"تعلم اللغات بدون إعلانات وبميزات متقدمة","features":["بدون إعلانات","درس مخصص","تقارير تقدم"]},
   {"id":11,"name":"PlayStation Plus","category":"gaming","icon":"🕹️","color":"#0a0a1f","badge":"hot","price":55,"period":"/شهر","desc":"العب أونلاين مع ألعاب مجانية شهرية","features":["لعب أونلاين","ألعاب شهرية","خصومات PS Store"]},
-  {"id":12,"name":"Notion AI","category":"productivity","icon":"📝","color":"#0f0a0a","badge":"new","price":18,"period":"/شهر","desc":"منظم ملاحظات ذكي مع قدرات الذكاء الاصطناعي","features":["AI كاتب","قواعد بيانات","تعاون فريق"]}
+  {"id":12,"name":"Notion AI","category":"productivity","icon":"📝","color":"#0f0a0a","badge":"new","price":18,"period":"/شهر","desc":"منظم ملاحظات ذكي مع قدرات الذكاء الاصطناعي","features":["AI كاتب","قواعد بيانات","تعاون فريق"]},
+  {"id":1780825235688,"name":"تأجير استوديو أيدياز","category":"productivity","icon":"🎙️","color":"#0f0f0f","badge":"new","price":5999,"period":"/6 ساعات","desc":"اطلق استوديو ف المجرة","features":[]}
 ]
+
