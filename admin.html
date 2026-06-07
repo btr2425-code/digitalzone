@@ -52,10 +52,19 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 
 /* PRODUCTS TABLE */
 .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.table-head{display:grid;grid-template-columns:40px 1fr 100px 80px 80px 100px;gap:12px;padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);font-weight:500;}
-.table-row{display:grid;grid-template-columns:40px 1fr 100px 80px 80px 100px;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background 0.15s;}
+.table-head{display:grid;grid-template-columns:24px 40px 1fr 100px 80px 80px 100px;gap:12px;padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);font-weight:500;}
+.table-row{display:grid;grid-template-columns:24px 40px 1fr 100px 80px 80px 100px;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background 0.15s;cursor:default;}
 .table-row:last-child{border-bottom:none;}
 .table-row:hover{background:rgba(255,255,255,0.02);}
+.table-row.dragging{opacity:0.4;background:rgba(59,130,246,0.08);}
+.table-row.drag-over{border-top:2px solid var(--accent);}
+.drag-handle{color:var(--muted);font-size:16px;cursor:grab;padding:2px;user-select:none;display:flex;align-items:center;}
+.drag-handle:hover{color:var(--text);}
+/* CATS DRAG */
+.cats-grid{display:flex;flex-direction:column;gap:10px;}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:default;}
+.cat-card.dragging{opacity:0.4;}
+.cat-card.drag-over{border-top:2px solid var(--accent);}
 .row-icon{font-size:24px;text-align:center;}
 .row-name{font-size:14px;font-weight:500;}
 .row-desc{font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -160,7 +169,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       </div>
       <div class="table-wrap">
         <div class="table-head">
-          <div></div><div>المنتج</div>
+          <div></div><div></div><div>المنتج</div>
           <div class="h-cat">الفئة</div>
           <div>السعر</div>
           <div class="h-badge">الشارة</div>
@@ -281,6 +290,46 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 const PASS = 'dz-admin-2025';
 let products = [], categories = [], settings = {}, editingProdId = null, editingCatId = null, isDirty = false;
 
+// ===== DRAG & DROP =====
+let dragSrcId = null, dragType = null;
+
+function dragStart(e){
+  dragSrcId = e.currentTarget.dataset.id;
+  dragType = e.currentTarget.dataset.type;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function dragOver(e){
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('drag-over');
+}
+function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
+function dragEnd(e){
+  document.querySelectorAll('.dragging,.drag-over').forEach(el=>{
+    el.classList.remove('dragging','drag-over');
+  });
+}
+function dropItem(e){
+  e.preventDefault();
+  const targetId = e.currentTarget.dataset.id;
+  if(dragSrcId === targetId) return;
+  if(dragType === 'product'){
+    const from = products.findIndex(p=>String(p.id)===dragSrcId);
+    const to   = products.findIndex(p=>String(p.id)===targetId);
+    const [item] = products.splice(from,1);
+    products.splice(to,0,item);
+    saveData(); renderProducts(); markDirty();
+  } else {
+    const from = categories.findIndex(c=>c.id===dragSrcId);
+    const to   = categories.findIndex(c=>c.id===targetId);
+    const [item] = categories.splice(from,1);
+    categories.splice(to,0,item);
+    saveData(); renderCats(); markDirty();
+  }
+  showToast('✅ تم تغيير الترتيب');
+}
+
 // ===== AUTH =====
 function doLogin(){
   const v = document.getElementById('pass-input').value;
@@ -329,8 +378,10 @@ function renderAll(){renderProducts();renderCats();renderSettings();}
 function renderProducts(){
   document.getElementById('prod-count').textContent = '('+products.length+')';
   const list = document.getElementById('products-list');
-  list.innerHTML = products.map(p => `
-    <div class="table-row">
+  list.innerHTML = products.map((p,i) => `
+    <div class="table-row" draggable="true" data-id="${p.id}" data-type="product"
+      ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event)" ondragleave="dragLeave(event)" ondragend="dragEnd(event)">
+      <div class="drag-handle" title="اسحب لإعادة الترتيب">⠿</div>
       <div class="row-icon">${p.icon}</div>
       <div><div class="row-name">${p.name}</div><div class="row-desc">${p.desc||''}</div></div>
       <div class="row-cat h-cat">${getCatLabel(p.category)}</div>
@@ -348,7 +399,9 @@ function renderProducts(){
 function renderCats(){
   const list = document.getElementById('cats-list');
   list.innerHTML = categories.map(c => `
-    <div class="cat-card">
+    <div class="cat-card" draggable="true" data-id="${c.id}" data-type="cat"
+      ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event)" ondragleave="dragLeave(event)" ondragend="dragEnd(event)">
+      <div class="drag-handle" title="اسحب لإعادة الترتيب">⠿</div>
       <div class="cat-icon">${c.icon}</div>
       <div class="cat-info"><div class="cat-label">${c.label}</div><div class="cat-id">${c.id}</div></div>
       <div class="cat-actions">
