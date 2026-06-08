@@ -5,7 +5,6 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DigitalZone — متجر الاشتراكات الرقمية</title>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -24,18 +23,28 @@
   .nav-links{display:flex;gap:1.5rem;list-style:none;}
   .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;white-space:nowrap;}
   .nav-links a:hover{color:var(--text);}
-  .btn-cart{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:8px 14px;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;}
+  .nav-right{display:flex;gap:10px;align-items:center;}
+  .btn-cart{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:8px 14px;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;transition:background 0.2s;}
   .btn-cart:hover{background:var(--surface);}
   .cart-count{background:var(--accent);color:white;border-radius:50%;width:18px;height:18px;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;}
+  .btn-login-nav{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;text-decoration:none;display:flex;align-items:center;gap:6px;transition:filter 0.2s;}
+  .btn-login-nav:hover{filter:brightness(1.1);}
+  .user-badge{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:7px 12px;border-radius:8px;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;position:relative;}
+  .user-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:6px;min-width:160px;display:none;z-index:200;animation:fadeDown 0.2s ease;}
+  .user-badge:hover .user-menu{display:block;}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  .user-menu-item{display:block;padding:9px 12px;color:var(--muted);font-size:13px;border-radius:7px;cursor:pointer;text-decoration:none;transition:all 0.15s;}
+  .user-menu-item:hover{background:var(--surface2);color:var(--text);}
+  .user-menu-item.danger{color:#f87171;}
 
   /* ===== HERO ===== */
   .hero{padding:60px 1.5rem 50px;text-align:center;position:relative;overflow:hidden;}
   .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(59,130,246,0.12) 0%,transparent 70%);pointer-events:none;}
-  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:20px;padding:5px 14px;font-size:12px;color:#93c5fd;margin-bottom:24px;}
-  .hero h1{font-size:clamp(26px,5vw,56px);font-weight:700;line-height:1.25;margin-bottom:16px;letter-spacing:-1px;}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:20px;padding:5px 14px;font-size:12px;color:#93c5fd;margin-bottom:24px;animation:fadeUp 0.5s ease both;}
+  .hero h1{font-size:clamp(26px,5vw,56px);font-weight:700;line-height:1.25;margin-bottom:16px;letter-spacing:-1px;animation:fadeUp 0.5s ease 0.1s both;}
   .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  .hero p{color:var(--muted);font-size:clamp(14px,2vw,17px);max-width:480px;margin:0 auto 32px;line-height:1.7;}
-  .hero-stats{display:flex;justify-content:center;gap:clamp(20px,5vw,48px);margin-top:40px;padding-top:40px;border-top:1px solid var(--border);flex-wrap:wrap;}
+  .hero p{color:var(--muted);font-size:clamp(14px,2vw,17px);max-width:480px;margin:0 auto 32px;line-height:1.7;animation:fadeUp 0.5s ease 0.2s both;}
+  .hero-stats{display:flex;justify-content:center;gap:clamp(20px,5vw,48px);margin-top:40px;padding-top:40px;border-top:1px solid var(--border);flex-wrap:wrap;animation:fadeUp 0.5s ease 0.3s both;}
   .stat-num{font-family:'Space Mono',monospace;font-size:clamp(20px,4vw,26px);font-weight:700;}
   .stat-lbl{font-size:13px;color:var(--muted);margin-top:4px;}
 
@@ -47,10 +56,14 @@
 
   /* ===== PRODUCTS ===== */
   .products-grid{padding:0 1.5rem 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;}
-  .product-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;animation:fadeUp 0.4s ease both;}
-  .product-card:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  .card-header{height:140px;display:flex;align-items:center;justify-content:center;position:relative;font-size:52px;}
+  .product-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;}
+  .product-card:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+  /* Scroll animation */
+  .product-card{opacity:0;transform:translateY(30px);transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.25s,box-shadow 0.25s;}
+  .product-card.visible{opacity:1;transform:translateY(0);}
+  .product-card.visible:hover{transform:translateY(-6px);}
+  .card-header{height:140px;display:flex;align-items:center;justify-content:center;position:relative;font-size:52px;transition:transform 0.3s ease;}
+  .product-card:hover .card-header{transform:scale(1.05);}
   .badge-hot{position:absolute;top:12px;right:12px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
   .badge-new{position:absolute;top:12px;right:12px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#4ade80;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
   .card-body{padding:18px 20px 20px;}
@@ -62,7 +75,7 @@
   .price-num{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;}
   .price-period{font-size:12px;color:var(--muted);}
   .btn-add{background:var(--accent);color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.2s;}
-  .btn-add:hover{background:#2563eb;transform:scale(1.03);}
+  .btn-add:hover{background:#2563eb;transform:scale(1.05);}
   .btn-add.added{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3);}
   .card-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
   .feature-tag{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:3px 10px;border-radius:20px;}
@@ -88,7 +101,8 @@
   .cart-total{margin-top:24px;padding:16px;background:var(--surface2);border-radius:12px;display:flex;justify-content:space-between;align-items:center;}
   .total-label{font-size:14px;color:var(--muted);}
   .total-num{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;}
-  .btn-checkout{width:100%;margin-top:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
+  .btn-checkout{width:100%;margin-top:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:14px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:filter 0.2s;}
+  .btn-checkout:hover{filter:brightness(1.1);}
   .empty-cart{text-align:center;padding:60px 0;color:var(--muted);font-size:14px;}
   .empty-cart div{font-size:48px;margin-bottom:16px;}
 
@@ -96,15 +110,23 @@
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:12px 20px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s ease;white-space:nowrap;}
   .toast.show{transform:translateX(-50%) translateY(0);}
 
+  /* ===== PARTICLES ===== */
+  .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .particle{position:absolute;border-radius:50%;background:var(--accent);opacity:0;animation:float linear infinite;}
+  @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:0.15;}90%{opacity:0.05;}100%{transform:translateY(-100px) scale(1);opacity:0;}}
+
   .loading{text-align:center;padding:80px;color:var(--muted);}
-  footer{border-top:1px solid var(--border);padding:32px 1.5rem;text-align:center;color:var(--muted);font-size:13px;}
+  footer{border-top:1px solid var(--border);padding:32px 1.5rem;text-align:center;color:var(--muted);font-size:13px;position:relative;z-index:1;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
   /* ===== MOBILE ===== */
   @media(max-width:640px){
     nav{padding:0 1rem;height:56px;}
     .nav-links{display:none;}
     .logo{font-size:15px;}
-    .btn-cart{padding:7px 12px;font-size:13px;}
+    .btn-cart{padding:7px 10px;font-size:13px;}
+    .btn-login-nav{padding:7px 10px;font-size:12px;}
     .hero{padding:40px 1rem 36px;}
     .hero-stats{gap:24px;}
     .hero-stats > div{min-width:70px;}
@@ -117,13 +139,17 @@
 </head>
 <body>
 
+<!-- Floating particles -->
+<div class="particles" id="particles"></div>
+
 <nav>
   <div class="logo">Digital<span>Zone</span></div>
   <ul class="nav-links">
     <li><a href="#">المتجر</a></li>
     <li><a href="#">الباقات</a></li>
   </ul>
-  <div style="display:flex;gap:12px;align-items:center;">
+  <div class="nav-right">
+    <div id="nav-auth"></div>
     <button class="btn-cart" onclick="openCart()">🛒 سلتي <div class="cart-count" id="cart-count">0</div></button>
   </div>
 </nav>
@@ -157,11 +183,75 @@
 <div class="toast" id="toast"></div>
 <footer><span id="footer-text">© 2025 DigitalZone — جميع الحقوق محفوظة</span></footer>
 
+<!-- Firebase Auth -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",
+  authDomain: "digitalzone-6a39a.firebaseapp.com",
+  projectId: "digitalzone-6a39a",
+  storageBucket: "digitalzone-6a39a.firebasestorage.app",
+  messagingSenderId: "607143644878",
+  appId: "1:607143644878:web:9f0e734d2e960511c58a9f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, user => {
+  const el = document.getElementById('nav-auth');
+  if (user) {
+    const name = user.displayName || user.email || user.phoneNumber || 'حسابي';
+    const short = name.length > 12 ? name.slice(0,12)+'...' : name;
+    el.innerHTML = `
+      <div class="user-badge">
+        👤 ${short}
+        <div class="user-menu">
+          <span class="user-menu-item">📦 طلباتي</span>
+          <span class="user-menu-item danger" id="logout-btn">تسجيل خروج</span>
+        </div>
+      </div>`;
+    document.getElementById('logout-btn').onclick = () => signOut(auth);
+    window.__firebaseUser = user;
+  } else {
+    el.innerHTML = `<a href="/login.html" class="btn-login-nav">👤 دخول / تسجيل</a>`;
+    window.__firebaseUser = null;
+  }
+});
+</script>
+
 <script>
-let products = [];
-let categories = [];
-let cart = [];
-let currentFilter = 'all';
+let products = [], categories = [], cart = [], currentFilter = 'all';
+
+// ===== PARTICLES =====
+(function(){
+  const container = document.getElementById('particles');
+  for(let i=0;i<18;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*4+2;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*20+15}s;
+      animation-delay:${Math.random()*20}s;
+      background:${Math.random()>0.5?'#3b82f6':'#6366f1'};
+    `;
+    container.appendChild(p);
+  }
+})();
+
+// ===== SCROLL ANIMATION =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if(entry.isIntersecting){
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.1});
 
 async function loadData() {
   try {
@@ -201,9 +291,7 @@ function applySettings(s) {
 function renderFilters() {
   const bar = document.getElementById('filters-bar');
   bar.innerHTML = `<button class="filter-btn active" onclick="filterProducts('all',this)">الكل</button>` +
-    categories.map(c =>
-      `<button class="filter-btn" onclick="filterProducts('${c.id}',this)">${c.icon} ${c.label}</button>`
-    ).join('');
+    categories.map(c => `<button class="filter-btn" onclick="filterProducts('${c.id}',this)">${c.icon} ${c.label}</button>`).join('');
 }
 
 function renderProducts(filter='all') {
@@ -211,7 +299,7 @@ function renderProducts(filter='all') {
   const filtered = filter==='all' ? products : products.filter(p=>p.category===filter);
   if(!filtered.length){grid.innerHTML='<div class="loading">لا توجد منتجات في هذه الفئة</div>';return;}
   grid.innerHTML = filtered.map((p,i) => `
-    <div class="product-card" style="animation-delay:${i*0.06}s">
+    <div class="product-card" style="transition-delay:${i*0.05}s">
       <div class="card-header" style="background:radial-gradient(ellipse at center,${p.color||'#0f0f0f'} 0%,#080b12 100%)">
         ${p.icon||'📦'}
         ${p.badge==='hot'?'<div class="badge-hot">🔥 رائج</div>':''}
@@ -230,6 +318,7 @@ function renderProducts(filter='all') {
         </div>
       </div>
     </div>`).join('');
+  document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 }
 
 function getCategoryLabel(catId) {
@@ -285,16 +374,20 @@ function renderCartItems() {
 function openCart(){document.getElementById('cart-overlay').classList.add('open');renderCartItems();}
 function closeCart(){document.getElementById('cart-overlay').classList.remove('open');}
 function closeCartOnOverlay(e){if(e.target===document.getElementById('cart-overlay'))closeCart();}
+
 function checkout(){
   if(!cart.length) return;
+  if(!window.__firebaseUser){
+    localStorage.setItem('dz_cart', JSON.stringify(cart));
+    localStorage.setItem('dz_redirect', '/checkout.html');
+    window.location.href='/login.html';
+    return;
+  }
   localStorage.setItem('dz_cart', JSON.stringify(cart));
   window.location.href='/checkout.html';
 }
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-if(window.netlifyIdentity){
-  window.netlifyIdentity.on('init', user=>{if(!user){window.netlifyIdentity.on('login',()=>{document.location.href='/admin/';})}});
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
 const FALLBACK_PRODUCTS = [
   {id:1,name:'Netflix',category:'streaming',icon:'🎬',color:'#1a0a0a',badge:'hot',price:29,period:'/شهر',desc:'أفلام ومسلسلات بلا حدود بجودة 4K',features:['4K Ultra HD','4 شاشات','تحميل للجوال']},
