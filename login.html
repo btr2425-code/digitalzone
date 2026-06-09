@@ -216,7 +216,7 @@ function showSuccess(user) {
   document.getElementById('auth-form').style.display = 'none';
   document.getElementById('success-screen').classList.add('show');
   document.getElementById('success-name').textContent = 'أهلاً ' + (user.displayName || user.email || user.phoneNumber || '') + ' 👋';
-  setTimeout(() => { window.location.href = '/'; }, 2000);
+  const cart = localStorage.getItem('dz_cart'); const dest = (cart && JSON.parse(cart).length > 0) ? '/checkout.html' : '/'; const btn = document.querySelector('.btn-goto'); if(btn) btn.href = dest; setTimeout(() => { window.location.href = dest; }, 2000);
 }
 
 function showErr(msg) {
