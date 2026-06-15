@@ -1,5 +1,5 @@
 [
-  {"id":1780825235688,"name":"تأجير استوديو أيدياز","category":"productivity","icon":"🎙️","color":"#0f0f0f","badge":"new","price":5999,"period":"/6 ساعات","desc":"اطلق استوديو ف المجرة","features":[]},
+  {"id":1780825235688,"name":"تأجير استوديو أيدياز","category":"productivity","icon":"🎙️","color":"#0f0f0f","badge":"new","price":5999,"period":"/6 ساعات","desc":"اطلق استوديو ف المجرة","features":[]},{"id":1,"name":"Netflix","image":"https://gemini.google.com/share/ce11c8245302}
   {"id":1,"name":"Netflix","category":"streaming","icon":"🎬","color":"#1a0a0a","badge":"hot","price":29,"period":"/شهر","desc":"أفلام ومسلسلات بلا حدود بجودة 4K","features":["4K Ultra HD","4 شاشات","تحميل للجوال"]},
   {"id":2,"name":"Spotify Premium","category":"music","icon":"🎵","color":"#0a1a0a","badge":"","price":19,"period":"/شهر","desc":"موسيقى وبودكاست بدون إعلانات","features":["بدون إعلانات","تحميل أغاني","صوت عالي الجودة"]},
   {"id":3,"name":"Adobe Creative","category":"creative","icon":"🎨","color":"#0a0a1a","badge":"new","price":89,"period":"/شهر","desc":"فوتوشوب، إليستريتور، وكل أدوات أدوبي","features":["+20 تطبيق","100GB سحابي","تحديثات مجانية"]},
