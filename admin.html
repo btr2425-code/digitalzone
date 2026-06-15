@@ -10,7 +10,6 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',sans-serif;min-height:100vh;}
 
-/* LOGIN */
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
 .login-card{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:40px;width:100%;max-width:380px;text-align:center;}
 .login-logo{font-family:'Space Mono',monospace;font-size:22px;margin-bottom:8px;}
@@ -19,70 +18,61 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',s
 .login-input{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:12px 16px;border-radius:10px;font-size:15px;font-family:inherit;outline:none;margin-bottom:12px;text-align:center;letter-spacing:4px;}
 .login-input::placeholder{letter-spacing:0;color:var(--muted);}
 .login-input:focus{border-color:var(--accent);}
-.btn-login{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:13px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;margin-top:4px;}
+.btn-login{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:13px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
 .login-err{color:var(--error);font-size:13px;margin-top:10px;display:none;}
 
-/* MAIN */
 .main-wrap{display:none;}
 nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
 .nav-logo{font-family:'Space Mono',monospace;font-size:16px;}
 .nav-logo span{color:var(--accent);}
 .nav-actions{display:flex;gap:10px;align-items:center;}
 .btn-sm{background:var(--surface2);border:1px solid var(--border2);color:var(--muted);padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
-.btn-sm:hover{color:var(--text);border-color:var(--border2);}
+.btn-sm:hover{color:var(--text);}
 .btn-primary{background:var(--accent);border-color:var(--accent);color:white;}
 .btn-primary:hover{background:#2563eb;color:white;}
 .btn-danger{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:#f87171;}
-.btn-danger:hover{background:rgba(239,68,68,0.2);color:#f87171;}
 
 .container{max-width:1100px;margin:0 auto;padding:32px 1.5rem 80px;}
 
-/* TABS */
-.tabs{display:flex;gap:8px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:0;}
-.tab{background:none;border:none;color:var(--muted);padding:10px 20px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;}
+.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--border);}
+.tab{background:none;border:none;color:var(--muted);padding:10px 18px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;}
 .tab:hover{color:var(--text);}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent);}
-
 .tab-content{display:none;}
 .tab-content.active{display:block;}
 
-/* SECTION HEADER */
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .section-title{font-size:18px;font-weight:600;}
 
 /* PRODUCTS TABLE */
 .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.table-head{display:grid;grid-template-columns:24px 40px 1fr 100px 80px 80px 100px;gap:12px;padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);font-weight:500;}
-.table-row{display:grid;grid-template-columns:24px 40px 1fr 100px 80px 80px 100px;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background 0.15s;cursor:default;}
+.table-head{display:grid;grid-template-columns:24px 56px 1fr 90px 70px 70px 100px;gap:10px;padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);font-weight:500;}
+.table-row{display:grid;grid-template-columns:24px 56px 1fr 90px 70px 70px 100px;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background 0.15s;}
 .table-row:last-child{border-bottom:none;}
 .table-row:hover{background:rgba(255,255,255,0.02);}
-.table-row.dragging{opacity:0.4;background:rgba(59,130,246,0.08);}
+.table-row.dragging{opacity:0.4;}
 .table-row.drag-over{border-top:2px solid var(--accent);}
-.drag-handle{color:var(--muted);font-size:16px;cursor:grab;padding:2px;user-select:none;display:flex;align-items:center;}
-.drag-handle:hover{color:var(--text);}
-/* CATS DRAG */
-.cats-grid{display:flex;flex-direction:column;gap:10px;}
-.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:default;}
-.cat-card.dragging{opacity:0.4;}
-.cat-card.drag-over{border-top:2px solid var(--accent);}
-.row-icon{font-size:24px;text-align:center;}
+.drag-handle{color:var(--muted);font-size:16px;cursor:grab;user-select:none;}
+.row-thumb{width:44px;height:44px;border-radius:10px;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--surface2);overflow:hidden;flex-shrink:0;}
+.row-thumb img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
 .row-name{font-size:14px;font-weight:500;}
-.row-desc{font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.row-cat{font-size:12px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:3px 10px;border-radius:20px;display:inline-block;}
-.row-price{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--accent);}
-.badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;display:inline-block;}
+.row-desc{font-size:12px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.row-cat{font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:3px 8px;border-radius:20px;display:inline-block;}
+.row-price{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--accent);}
+.badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:600;}
 .badge-hot{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#f87171;}
 .badge-new{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#4ade80;}
 .badge-none{color:var(--muted);font-size:12px;}
-.row-actions{display:flex;gap:6px;}
-.btn-edit{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#93c5fd;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;}
+.row-actions{display:flex;gap:5px;}
+.btn-edit{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#93c5fd;padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;}
 .btn-edit:hover{background:rgba(59,130,246,0.2);}
-.btn-del{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#f87171;padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;}
+.btn-del{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#f87171;padding:5px 8px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;}
 .btn-del:hover{background:rgba(239,68,68,0.18);}
 
-/* CATEGORIES */
-.cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
-.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;}
+/* CATS */
+.cats-grid{display:flex;flex-direction:column;gap:10px;}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+.cat-card.drag-over{border-top:2px solid var(--accent);}
 .cat-icon{font-size:28px;}
 .cat-info{flex:1;}
 .cat-label{font-size:14px;font-weight:500;}
@@ -95,14 +85,40 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .field-group{display:flex;flex-direction:column;gap:6px;}
 .field-label{font-size:13px;color:var(--muted);}
-.field-input{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:border-color 0.2s;}
+.field-input{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:border-color 0.2s;width:100%;}
 .field-input:focus{border-color:var(--accent);}
 .field-full{grid-column:1/-1;}
+
+/* IMAGE UPLOAD */
+.img-upload-wrap{display:flex;gap:12px;align-items:flex-start;}
+.img-preview{width:80px;height:80px;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden;flex-shrink:0;}
+.img-preview img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
+.img-controls{flex:1;display:flex;flex-direction:column;gap:8px;}
+.btn-upload{background:var(--surface2);border:1px dashed var(--border2);color:var(--muted);padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;text-align:center;transition:all 0.2s;}
+.btn-upload:hover{border-color:var(--accent);color:var(--accent);}
+.img-or{text-align:center;font-size:12px;color:var(--muted);}
+
+/* REVIEWS */
+.reviews-wrap{display:flex;flex-direction:column;gap:12px;}
+.review-card-admin{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.review-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.review-meta{display:flex;align-items:center;gap:10px;}
+.reviewer-avatar-sm{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;}
+.reviewer-name-sm{font-size:14px;font-weight:500;}
+.review-prod{font-size:12px;color:var(--muted);}
+.stars-select{display:flex;gap:4px;}
+.star-btn{background:none;border:none;font-size:20px;cursor:pointer;padding:0;line-height:1;transition:transform 0.1s;}
+.star-btn:hover{transform:scale(1.2);}
+.review-text-input{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;font-family:inherit;outline:none;resize:vertical;min-height:60px;}
+.review-text-input:focus{border-color:var(--accent);}
+.review-actions{display:flex;gap:8px;margin-top:10px;justify-content:flex-end;}
+.btn-add-review{background:var(--surface);border:1px dashed var(--border2);color:var(--muted);padding:12px;border-radius:10px;font-size:13px;cursor:pointer;font-family:inherit;width:100%;transition:all 0.2s;}
+.btn-add-review:hover{border-color:var(--accent);color:var(--accent);}
 
 /* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1rem;}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;padding:28px;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;padding:28px;}
 .modal-title{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;}
 .modal-fields{display:flex;flex-direction:column;gap:14px;}
 .modal-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
@@ -110,30 +126,35 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .features-list{display:flex;flex-direction:column;gap:6px;}
 .feature-item{display:flex;gap:6px;align-items:center;}
 .feature-item .field-input{flex:1;}
-.btn-add-feature{background:none;border:1px dashed var(--border2);color:var(--muted);padding:8px;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;width:100%;margin-top:4px;}
+.btn-add-feature{background:none;border:1px dashed var(--border2);color:var(--muted);padding:8px;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;width:100%;}
 .btn-add-feature:hover{border-color:var(--accent);color:var(--accent);}
 .btn-rm-feature{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 6px;line-height:1;}
 .btn-rm-feature:hover{color:#f87171;}
 
-/* TOAST */
+/* RATING CONTROL */
+.rating-control{display:flex;align-items:center;gap:12px;}
+.stars-input{display:flex;gap:4px;}
+.star-inp{font-size:24px;cursor:pointer;opacity:0.3;transition:all 0.15s;}
+.star-inp.active{opacity:1;}
+.star-inp:hover{transform:scale(1.15);}
+.rating-num-input{width:70px;text-align:center;font-family:'Space Mono',monospace;}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:12px 20px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
-/* SAVE BAR */
 .save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border2);padding:14px 24px;display:none;align-items:center;justify-content:space-between;z-index:150;}
 .save-bar.show{display:flex;}
 .save-bar-text{font-size:14px;color:var(--muted);}
 
 @media(max-width:640px){
-  .table-head,.table-row{grid-template-columns:36px 1fr 70px 80px;}
-  .table-head .h-cat,.table-row .row-cat,.table-head .h-badge,.table-row .row-badge{display:none;}
+  .table-head,.table-row{grid-template-columns:24px 44px 1fr 80px;}
+  .h-cat,.row-cat,.h-badge,.row-badge{display:none;}
   .field-grid,.modal-row{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div class="login-wrap" id="login-wrap">
   <div class="login-card">
     <div class="login-logo">Digital<span>Zone</span></div>
@@ -144,7 +165,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="main-wrap" id="main-wrap">
   <nav>
     <div class="nav-logo">Digital<span>Zone</span> <span style="color:var(--muted);font-size:12px;margin-right:8px;">لوحة التحكم</span></div>
@@ -158,10 +178,11 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
     <div class="tabs">
       <button class="tab active" onclick="switchTab('products',this)">📦 المنتجات</button>
       <button class="tab" onclick="switchTab('categories',this)">🗂️ الفئات</button>
+      <button class="tab" onclick="switchTab('reviews',this)">⭐ التقييمات</button>
       <button class="tab" onclick="switchTab('settings',this)">⚙️ الإعدادات</button>
     </div>
 
-    <!-- PRODUCTS TAB -->
+    <!-- PRODUCTS -->
     <div class="tab-content active" id="tab-products">
       <div class="section-header">
         <div class="section-title">المنتجات <span id="prod-count" style="color:var(--muted);font-size:14px;font-weight:400;"></span></div>
@@ -169,7 +190,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       </div>
       <div class="table-wrap">
         <div class="table-head">
-          <div></div><div></div><div>المنتج</div>
+          <div></div><div>الصورة</div><div>المنتج</div>
           <div class="h-cat">الفئة</div>
           <div>السعر</div>
           <div class="h-badge">الشارة</div>
@@ -179,7 +200,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       </div>
     </div>
 
-    <!-- CATEGORIES TAB -->
+    <!-- CATEGORIES -->
     <div class="tab-content" id="tab-categories">
       <div class="section-header">
         <div class="section-title">الفئات</div>
@@ -188,7 +209,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       <div class="cats-grid" id="cats-list"></div>
     </div>
 
-    <!-- SETTINGS TAB -->
+    <!-- REVIEWS -->
+    <div class="tab-content" id="tab-reviews">
+      <div class="section-header">
+        <div class="section-title">التقييمات</div>
+        <button class="btn-sm btn-primary" onclick="addNewReview()">+ تقييم جديد</button>
+      </div>
+      <div class="reviews-wrap" id="reviews-list"></div>
+    </div>
+
+    <!-- SETTINGS -->
     <div class="tab-content" id="tab-settings">
       <div class="settings-card">
         <div class="settings-title">إعدادات الموقع</div>
@@ -222,14 +252,29 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       <button class="btn-sm" onclick="closeModal('prod-modal')">✕</button>
     </div>
     <div class="modal-fields">
+      <!-- صورة المنتج -->
+      <div class="field-group">
+        <label class="field-label">صورة المنتج</label>
+        <div class="img-upload-wrap">
+          <div class="img-preview" id="img-preview-wrap">
+            <span id="img-preview-emoji">📦</span>
+          </div>
+          <div class="img-controls">
+            <label class="btn-upload" for="img-file-input">📁 اختر صورة من جهازك</label>
+            <input type="file" id="img-file-input" accept="image/*" style="display:none;" onchange="handleImageFile(this)">
+            <div class="img-or">— أو —</div>
+            <input class="field-input" id="p-image" placeholder="رابط الصورة URL" oninput="previewImageUrl(this.value)" style="font-size:12px;">
+            <div style="font-size:11px;color:var(--muted);">اتركه فارغاً لاستخدام الإيموجي</div>
+          </div>
+        </div>
+      </div>
+
       <div class="modal-row">
         <div class="field-group"><label class="field-label">اسم المنتج</label><input class="field-input" id="p-name"></div>
         <div class="field-group"><label class="field-label">الأيقونة (إيموجي)</label><input class="field-input" id="p-icon" style="font-size:22px;text-align:center;"></div>
       </div>
       <div class="modal-row">
-        <div class="field-group"><label class="field-label">الفئة</label>
-          <select class="field-input" id="p-cat"></select>
-        </div>
+        <div class="field-group"><label class="field-label">الفئة</label><select class="field-input" id="p-cat"></select></div>
         <div class="field-group"><label class="field-label">الشارة</label>
           <select class="field-input" id="p-badge">
             <option value="">بدون</option>
@@ -242,8 +287,27 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
         <div class="field-group"><label class="field-label">السعر (ر.س)</label><input class="field-input" id="p-price" type="number"></div>
         <div class="field-group"><label class="field-label">الفترة</label><input class="field-input" id="p-period" placeholder="/شهر"></div>
       </div>
-      <div class="field-group"><label class="field-label">الوصف</label><input class="field-input" id="p-desc"></div>
-      <div class="field-group"><label class="field-label">لون الخلفية</label><input class="field-input" id="p-color" type="color"></div>
+      <div class="field-group"><label class="field-label">الوصف</label><textarea class="field-input" id="p-desc" rows="3" style="resize:vertical;"></textarea></div>
+      <div class="modal-row">
+        <div class="field-group"><label class="field-label">لون الخلفية</label><input class="field-input" id="p-color" type="color"></div>
+        <div class="field-group">
+          <label class="field-label">التقييم</label>
+          <div class="rating-control">
+            <div class="stars-input" id="stars-input">
+              <span class="star-inp active" onclick="setStars(1)">★</span>
+              <span class="star-inp active" onclick="setStars(2)">★</span>
+              <span class="star-inp active" onclick="setStars(3)">★</span>
+              <span class="star-inp active" onclick="setStars(4)">★</span>
+              <span class="star-inp active" onclick="setStars(5)">★</span>
+            </div>
+            <input class="field-input rating-num-input" id="p-rating" type="number" min="1" max="5" step="0.1" value="5" oninput="updateStarsFromInput()">
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">عدد التقييمات</label>
+        <input class="field-input" id="p-review-count" type="number" placeholder="مثال: 128">
+      </div>
       <div class="field-group">
         <label class="field-label">المميزات</label>
         <div class="features-list" id="features-list"></div>
@@ -276,96 +340,48 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
   </div>
 </div>
 
-<!-- SAVE BAR -->
 <div class="save-bar" id="save-bar">
   <div class="save-bar-text">⚠️ عندك تغييرات غير محفوظة — انسخ البيانات وحدّث ملفات GitHub</div>
-  <div style="display:flex;gap:10px;">
-    <button class="btn-sm btn-primary" onclick="exportData()">📋 نسخ البيانات</button>
-  </div>
+  <button class="btn-sm btn-primary" onclick="exportData()">📋 نسخ البيانات</button>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 const PASS = 'dz-admin-2025';
-let products = [], categories = [], settings = {}, editingProdId = null, editingCatId = null, isDirty = false;
-
-// ===== DRAG & DROP =====
-let dragSrcId = null, dragType = null;
-
-function dragStart(e){
-  dragSrcId = e.currentTarget.dataset.id;
-  dragType = e.currentTarget.dataset.type;
-  e.currentTarget.classList.add('dragging');
-  e.dataTransfer.effectAllowed = 'move';
-}
-function dragOver(e){
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  e.currentTarget.classList.add('drag-over');
-}
-function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
-function dragEnd(e){
-  document.querySelectorAll('.dragging,.drag-over').forEach(el=>{
-    el.classList.remove('dragging','drag-over');
-  });
-}
-function dropItem(e){
-  e.preventDefault();
-  const targetId = e.currentTarget.dataset.id;
-  if(dragSrcId === targetId) return;
-  if(dragType === 'product'){
-    const from = products.findIndex(p=>String(p.id)===dragSrcId);
-    const to   = products.findIndex(p=>String(p.id)===targetId);
-    const [item] = products.splice(from,1);
-    products.splice(to,0,item);
-    saveData(); renderProducts(); markDirty();
-  } else {
-    const from = categories.findIndex(c=>c.id===dragSrcId);
-    const to   = categories.findIndex(c=>c.id===targetId);
-    const [item] = categories.splice(from,1);
-    categories.splice(to,0,item);
-    saveData(); renderCats(); markDirty();
-  }
-  showToast('✅ تم تغيير الترتيب');
-}
+let products=[], categories=[], settings={}, reviews=[];
+let editingProdId=null, editingCatId=null, currentStars=5, currentImgBase64='';
 
 // ===== AUTH =====
 function doLogin(){
-  const v = document.getElementById('pass-input').value;
-  if(v === PASS){
-    document.getElementById('login-wrap').style.display = 'none';
-    document.getElementById('main-wrap').style.display = 'block';
-    loadData();
-  } else {
-    document.getElementById('login-err').style.display = 'block';
-  }
+  const v=document.getElementById('pass-input').value;
+  if(v===PASS){document.getElementById('login-wrap').style.display='none';document.getElementById('main-wrap').style.display='block';loadData();}
+  else{document.getElementById('login-err').style.display='block';}
 }
 function doLogout(){
-  document.getElementById('login-wrap').style.display = 'flex';
-  document.getElementById('main-wrap').style.display = 'none';
-  document.getElementById('pass-input').value = '';
+  document.getElementById('login-wrap').style.display='flex';
+  document.getElementById('main-wrap').style.display='none';
+  document.getElementById('pass-input').value='';
 }
 
 // ===== DATA =====
 function loadData(){
-  const sp = localStorage.getItem('dz_products');
-  const sc = localStorage.getItem('dz_categories');
-  const ss = localStorage.getItem('dz_settings');
-  products = sp ? JSON.parse(sp) : INIT_PRODUCTS;
-  categories = sc ? JSON.parse(sc) : INIT_CATS;
-  settings = ss ? JSON.parse(ss) : INIT_SETTINGS;
+  products=JSON.parse(localStorage.getItem('dz_products')||'null')||INIT_PRODUCTS;
+  categories=JSON.parse(localStorage.getItem('dz_categories')||'null')||INIT_CATS;
+  settings=JSON.parse(localStorage.getItem('dz_settings')||'null')||INIT_SETTINGS;
+  reviews=JSON.parse(localStorage.getItem('dz_reviews')||'null')||INIT_REVIEWS;
   renderAll();
 }
 function saveData(){
-  localStorage.setItem('dz_products', JSON.stringify(products));
-  localStorage.setItem('dz_categories', JSON.stringify(categories));
-  localStorage.setItem('dz_settings', JSON.stringify(settings));
+  localStorage.setItem('dz_products',JSON.stringify(products));
+  localStorage.setItem('dz_categories',JSON.stringify(categories));
+  localStorage.setItem('dz_settings',JSON.stringify(settings));
+  localStorage.setItem('dz_reviews',JSON.stringify(reviews));
 }
-function markDirty(){isDirty=true;document.getElementById('save-bar').classList.add('show');}
+function markDirty(){document.getElementById('save-bar').classList.add('show');}
 
 // ===== TABS =====
-function switchTab(name, el){
+function switchTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
@@ -373,22 +389,25 @@ function switchTab(name, el){
 }
 
 // ===== RENDER =====
-function renderAll(){renderProducts();renderCats();renderSettings();}
+function renderAll(){renderProducts();renderCats();renderReviews();renderSettings();}
+
+function getThumb(p){
+  if(p.imageBase64) return `<img src="${p.imageBase64}" alt="${p.name}">`;
+  if(p.image) return `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.icon||'📦'}'">`;
+  return p.icon||'📦';
+}
 
 function renderProducts(){
-  document.getElementById('prod-count').textContent = '('+products.length+')';
-  const list = document.getElementById('products-list');
-  list.innerHTML = products.map((p,i) => `
+  document.getElementById('prod-count').textContent='('+products.length+')';
+  document.getElementById('products-list').innerHTML=products.map(p=>`
     <div class="table-row" draggable="true" data-id="${p.id}" data-type="product"
       ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event)" ondragleave="dragLeave(event)" ondragend="dragEnd(event)">
-      <div class="drag-handle" title="اسحب لإعادة الترتيب">⠿</div>
-      <div class="row-icon">${p.icon}</div>
+      <div class="drag-handle">⠿</div>
+      <div class="row-thumb">${getThumb(p)}</div>
       <div><div class="row-name">${p.name}</div><div class="row-desc">${p.desc||''}</div></div>
       <div class="row-cat h-cat">${getCatLabel(p.category)}</div>
       <div class="row-price">${p.price} ر.س</div>
-      <div class="row-badge h-badge">
-        ${p.badge==='hot'?'<span class="badge badge-hot">🔥 رائج</span>':p.badge==='new'?'<span class="badge badge-new">✦ جديد</span>':'<span class="badge-none">—</span>'}
-      </div>
+      <div class="h-badge">${p.badge==='hot'?'<span class="badge badge-hot">🔥</span>':p.badge==='new'?'<span class="badge badge-new">✦</span>':'<span class="badge-none">—</span>'}</div>
       <div class="row-actions">
         <button class="btn-edit" onclick="openProductModal(${p.id})">تعديل</button>
         <button class="btn-del" onclick="deleteProduct(${p.id})">✕</button>
@@ -397,11 +416,10 @@ function renderProducts(){
 }
 
 function renderCats(){
-  const list = document.getElementById('cats-list');
-  list.innerHTML = categories.map(c => `
+  document.getElementById('cats-list').innerHTML=categories.map(c=>`
     <div class="cat-card" draggable="true" data-id="${c.id}" data-type="cat"
       ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event)" ondragleave="dragLeave(event)" ondragend="dragEnd(event)">
-      <div class="drag-handle" title="اسحب لإعادة الترتيب">⠿</div>
+      <div class="drag-handle">⠿</div>
       <div class="cat-icon">${c.icon}</div>
       <div class="cat-info"><div class="cat-label">${c.label}</div><div class="cat-id">${c.id}</div></div>
       <div class="cat-actions">
@@ -411,152 +429,213 @@ function renderCats(){
     </div>`).join('');
 }
 
+function renderReviews(){
+  const el=document.getElementById('reviews-list');
+  el.innerHTML=reviews.map((r,i)=>`
+    <div class="review-card-admin">
+      <div class="review-header">
+        <div class="review-meta">
+          <div class="reviewer-avatar-sm">${r.avatar||r.name[0]}</div>
+          <div>
+            <div class="reviewer-name-sm"><input class="field-input" value="${r.name}" onchange="reviews[${i}].name=this.value;saveData();" style="padding:4px 8px;font-size:13px;width:140px;"></div>
+            <div class="review-prod">
+              <select style="background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:2px 6px;border-radius:6px;font-size:11px;font-family:inherit;" onchange="reviews[${i}].productId=this.value;saveData();">
+                <option value="">— كل المنتجات —</option>
+                ${products.map(p=>`<option value="${p.id}" ${r.productId==p.id?'selected':''}>${p.name}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        </div>
+        <button class="btn-del" onclick="deleteReview(${i})">✕ حذف</button>
+      </div>
+      <div class="stars-select" style="margin-bottom:8px;">
+        ${[1,2,3,4,5].map(s=>`<button class="star-btn" onclick="setReviewStars(${i},${s})" style="color:${s<=(r.stars||5)?'#f59e0b':'#374151'}">${s<=(r.stars||5)?'★':'☆'}</button>`).join('')}
+        <span style="font-size:12px;color:var(--muted);margin-right:6px;">${r.stars||5}/5</span>
+      </div>
+      <textarea class="review-text-input" onchange="reviews[${i}].text=this.value;saveData();">${r.text}</textarea>
+      <div style="display:flex;gap:8px;margin-top:8px;align-items:center;">
+        <input class="field-input" value="${r.date}" onchange="reviews[${i}].date=this.value;saveData();" style="padding:4px 8px;font-size:12px;width:120px;" placeholder="التاريخ">
+        <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px;">
+          <input type="checkbox" ${r.visible!==false?'checked':''} onchange="reviews[${i}].visible=this.checked;saveData();renderReviews();"> ظاهر للعملاء
+        </label>
+      </div>
+    </div>`).join('')+`<button class="btn-add-review" onclick="addNewReview()">+ إضافة تقييم جديد</button>`;
+}
+
+function addNewReview(){
+  reviews.unshift({id:Date.now(),name:'عميل جديد',avatar:'ع',stars:5,text:'تقييم رائع!',date:'منذ يوم',productId:'',visible:true});
+  saveData();renderReviews();markDirty();
+  showToast('✅ تم إضافة تقييم');
+}
+
+function deleteReview(i){
+  if(!confirm('حذف التقييم؟'))return;
+  reviews.splice(i,1);saveData();renderReviews();markDirty();
+  showToast('🗑️ تم حذف التقييم');
+}
+
+function setReviewStars(i,s){
+  reviews[i].stars=s;saveData();renderReviews();
+}
+
 function renderSettings(){
-  const s = settings;
-  document.getElementById('s-name').value = s.site_name||'';
-  document.getElementById('s-tagline').value = s.site_tagline||'';
-  document.getElementById('s-hero-title').value = s.hero_title||'';
-  document.getElementById('s-hero-sub').value = s.hero_subtitle||'';
-  document.getElementById('s-s1n').value = s.stat1_num||'';
-  document.getElementById('s-s1l').value = s.stat1_label||'';
-  document.getElementById('s-s2n').value = s.stat2_num||'';
-  document.getElementById('s-s2l').value = s.stat2_label||'';
-  document.getElementById('s-s3n').value = s.stat3_num||'';
-  document.getElementById('s-s3l').value = s.stat3_label||'';
-  document.getElementById('s-accent').value = s.accent_color||'#3b82f6';
-  document.getElementById('s-footer').value = s.footer_text||'';
+  const s=settings;
+  document.getElementById('s-name').value=s.site_name||'';
+  document.getElementById('s-tagline').value=s.site_tagline||'';
+  document.getElementById('s-hero-title').value=s.hero_title||'';
+  document.getElementById('s-hero-sub').value=s.hero_subtitle||'';
+  document.getElementById('s-s1n').value=s.stat1_num||'';
+  document.getElementById('s-s1l').value=s.stat1_label||'';
+  document.getElementById('s-s2n').value=s.stat2_num||'';
+  document.getElementById('s-s2l').value=s.stat2_label||'';
+  document.getElementById('s-s3n').value=s.stat3_num||'';
+  document.getElementById('s-s3l').value=s.stat3_label||'';
+  document.getElementById('s-accent').value=s.accent_color||'#3b82f6';
+  document.getElementById('s-footer').value=s.footer_text||'';
 }
 
-function getCatLabel(id){
-  const c = categories.find(x=>x.id===id);
-  return c ? c.icon+' '+c.label : id;
+function getCatLabel(id){const c=categories.find(x=>x.id===id);return c?c.icon+' '+c.label:id;}
+
+// ===== IMAGE HANDLING =====
+function handleImageFile(input){
+  const file=input.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    currentImgBase64=e.target.result;
+    document.getElementById('p-image').value='';
+    updateImgPreview(currentImgBase64);
+  };
+  reader.readAsDataURL(file);
 }
 
-// ===== PRODUCTS MODAL =====
-function openProductModal(id=null){
-  editingProdId = id;
-  document.getElementById('prod-modal-title').textContent = id ? 'تعديل المنتج' : 'منتج جديد';
-  const catSel = document.getElementById('p-cat');
-  catSel.innerHTML = categories.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('');
-  if(id){
-    const p = products.find(x=>x.id===id);
-    document.getElementById('p-name').value = p.name;
-    document.getElementById('p-icon').value = p.icon;
-    document.getElementById('p-cat').value = p.category;
-    document.getElementById('p-badge').value = p.badge||'';
-    document.getElementById('p-price').value = p.price;
-    document.getElementById('p-period').value = p.period;
-    document.getElementById('p-desc').value = p.desc||'';
-    document.getElementById('p-color').value = p.color||'#0f0f0f';
-    renderFeatures(p.features||[]);
+function previewImageUrl(url){
+  currentImgBase64='';
+  updateImgPreview(url||null);
+}
+
+function updateImgPreview(src){
+  const wrap=document.getElementById('img-preview-wrap');
+  const emoji=document.getElementById('img-preview-emoji');
+  if(src){
+    wrap.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" onerror="this.parentElement.innerHTML='<span id=img-preview-emoji>📦</span>'">`;
   } else {
-    document.getElementById('p-name').value='';
-    document.getElementById('p-icon').value='📦';
-    document.getElementById('p-badge').value='';
-    document.getElementById('p-price').value='';
-    document.getElementById('p-period').value='/شهر';
-    document.getElementById('p-desc').value='';
-    document.getElementById('p-color').value='#0f0f0f';
-    renderFeatures([]);
+    wrap.innerHTML=`<span id="img-preview-emoji">${document.getElementById('p-icon').value||'📦'}</span>`;
   }
+}
+
+// ===== STARS =====
+function setStars(n){
+  currentStars=n;
+  document.getElementById('p-rating').value=n;
+  document.querySelectorAll('.star-inp').forEach((s,i)=>s.classList.toggle('active',i<n));
+}
+function updateStarsFromInput(){
+  const v=parseFloat(document.getElementById('p-rating').value)||5;
+  currentStars=v;
+  document.querySelectorAll('.star-inp').forEach((s,i)=>s.classList.toggle('active',i<Math.round(v)));
+}
+
+// ===== PRODUCT MODAL =====
+function openProductModal(id=null){
+  editingProdId=id;
+  currentImgBase64='';
+  document.getElementById('prod-modal-title').textContent=id?'تعديل المنتج':'منتج جديد';
+  document.getElementById('p-cat').innerHTML=categories.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('');
+  const p=id?products.find(x=>x.id===id):null;
+  document.getElementById('p-name').value=p?.name||'';
+  document.getElementById('p-icon').value=p?.icon||'📦';
+  document.getElementById('p-cat').value=p?.category||categories[0]?.id||'';
+  document.getElementById('p-badge').value=p?.badge||'';
+  document.getElementById('p-price').value=p?.price||'';
+  document.getElementById('p-period').value=p?.period||'/شهر';
+  document.getElementById('p-desc').value=p?.desc||'';
+  document.getElementById('p-color').value=p?.color||'#0f0f0f';
+  document.getElementById('p-image').value=p?.image||'';
+  document.getElementById('p-rating').value=p?.rating||5;
+  document.getElementById('p-review-count').value=p?.reviewCount||'';
+  currentStars=p?.rating||5;
+  document.querySelectorAll('.star-inp').forEach((s,i)=>s.classList.toggle('active',i<Math.round(currentStars)));
+  // preview image
+  if(p?.imageBase64){currentImgBase64=p.imageBase64;updateImgPreview(p.imageBase64);}
+  else if(p?.image){updateImgPreview(p.image);}
+  else{document.getElementById('img-preview-wrap').innerHTML=`<span id="img-preview-emoji">${p?.icon||'📦'}</span>`;}
+  renderFeatures(p?.features||[]);
+  document.getElementById('img-file-input').value='';
   document.getElementById('prod-modal').classList.add('open');
 }
 
 function renderFeatures(feats){
-  const list = document.getElementById('features-list');
-  list.innerHTML = feats.map((f,i)=>`
-    <div class="feature-item">
-      <input class="field-input" value="${f}" placeholder="ميزة...">
-      <button class="btn-rm-feature" onclick="this.parentElement.remove()">✕</button>
-    </div>`).join('');
+  document.getElementById('features-list').innerHTML=feats.map(f=>`
+    <div class="feature-item"><input class="field-input" value="${f}" placeholder="ميزة..."><button class="btn-rm-feature" onclick="this.parentElement.remove()">✕</button></div>`).join('');
 }
 function addFeature(){
-  const list = document.getElementById('features-list');
-  const div = document.createElement('div');
-  div.className = 'feature-item';
-  div.innerHTML = `<input class="field-input" placeholder="ميزة..."><button class="btn-rm-feature" onclick="this.parentElement.remove()">✕</button>`;
-  list.appendChild(div);
+  const div=document.createElement('div');div.className='feature-item';
+  div.innerHTML=`<input class="field-input" placeholder="ميزة..."><button class="btn-rm-feature" onclick="this.parentElement.remove()">✕</button>`;
+  document.getElementById('features-list').appendChild(div);
 }
 
 function saveProduct(){
-  const name = document.getElementById('p-name').value.trim();
+  const name=document.getElementById('p-name').value.trim();
   if(!name){showToast('أدخل اسم المنتج');return;}
-  const features = [...document.querySelectorAll('#features-list .field-input')].map(i=>i.value.trim()).filter(Boolean);
-  const data = {
-    name, icon:document.getElementById('p-icon').value,
+  const features=[...document.querySelectorAll('#features-list .field-input')].map(i=>i.value.trim()).filter(Boolean);
+  const data={
+    name,icon:document.getElementById('p-icon').value,
     category:document.getElementById('p-cat').value,
     badge:document.getElementById('p-badge').value,
     price:parseInt(document.getElementById('p-price').value)||0,
     period:document.getElementById('p-period').value,
     desc:document.getElementById('p-desc').value,
     color:document.getElementById('p-color').value,
+    image:document.getElementById('p-image').value,
+    imageBase64:currentImgBase64||'',
+    rating:parseFloat(document.getElementById('p-rating').value)||5,
+    reviewCount:parseInt(document.getElementById('p-review-count').value)||0,
     features
   };
-  if(editingProdId){
-    const idx = products.findIndex(x=>x.id===editingProdId);
-    products[idx] = {...products[idx],...data};
-  } else {
-    data.id = Date.now();
-    products.push(data);
-  }
-  saveData(); renderProducts(); markDirty();
+  if(editingProdId){const idx=products.findIndex(x=>x.id===editingProdId);products[idx]={...products[idx],...data};}
+  else{data.id=Date.now();products.push(data);}
+  saveData();renderProducts();markDirty();
   closeModal('prod-modal');
-  showToast(editingProdId ? '✅ تم تعديل المنتج' : '✅ تم إضافة المنتج');
+  showToast(editingProdId?'✅ تم تعديل المنتج':'✅ تم إضافة المنتج');
 }
 
 function deleteProduct(id){
-  if(!confirm('تأكيد حذف المنتج؟')) return;
-  products = products.filter(p=>p.id!==id);
-  saveData(); renderProducts(); markDirty();
+  if(!confirm('تأكيد حذف المنتج؟'))return;
+  products=products.filter(p=>p.id!==id);saveData();renderProducts();markDirty();
   showToast('🗑️ تم حذف المنتج');
 }
 
 // ===== CATS MODAL =====
 function openCatModal(id=null){
-  editingCatId = id;
-  document.getElementById('cat-modal-title').textContent = id ? 'تعديل الفئة' : 'فئة جديدة';
-  if(id){
-    const c = categories.find(x=>x.id===id);
-    document.getElementById('c-id').value = c.id;
-    document.getElementById('c-label').value = c.label;
-    document.getElementById('c-icon').value = c.icon;
-    document.getElementById('c-id').disabled = true;
-  } else {
-    document.getElementById('c-id').value='';
-    document.getElementById('c-label').value='';
-    document.getElementById('c-icon').value='📦';
-    document.getElementById('c-id').disabled = false;
-  }
+  editingCatId=id;
+  document.getElementById('cat-modal-title').textContent=id?'تعديل الفئة':'فئة جديدة';
+  const c=id?categories.find(x=>x.id===id):null;
+  document.getElementById('c-id').value=c?.id||'';
+  document.getElementById('c-label').value=c?.label||'';
+  document.getElementById('c-icon').value=c?.icon||'📦';
+  document.getElementById('c-id').disabled=!!id;
   document.getElementById('cat-modal').classList.add('open');
 }
-
 function saveCat(){
-  const id = document.getElementById('c-id').value.trim();
-  const label = document.getElementById('c-label').value.trim();
+  const id=document.getElementById('c-id').value.trim();
+  const label=document.getElementById('c-label').value.trim();
   if(!id||!label){showToast('أكمل البيانات');return;}
-  const data = {id, label, icon:document.getElementById('c-icon').value};
-  if(editingCatId){
-    const idx = categories.findIndex(x=>x.id===editingCatId);
-    categories[idx] = data;
-  } else {
-    if(categories.find(x=>x.id===id)){showToast('المعرّف موجود مسبقاً');return;}
-    categories.push(data);
-  }
-  saveData(); renderCats(); markDirty();
-  closeModal('cat-modal');
+  const data={id,label,icon:document.getElementById('c-icon').value};
+  if(editingCatId){const idx=categories.findIndex(x=>x.id===editingCatId);categories[idx]=data;}
+  else{if(categories.find(x=>x.id===id)){showToast('المعرّف موجود مسبقاً');return;}categories.push(data);}
+  saveData();renderCats();markDirty();closeModal('cat-modal');
   showToast('✅ تم حفظ الفئة');
 }
-
 function deleteCat(id){
-  if(!confirm('تأكيد حذف الفئة؟')) return;
-  categories = categories.filter(c=>c.id!==id);
-  saveData(); renderCats(); markDirty();
+  if(!confirm('تأكيد حذف الفئة؟'))return;
+  categories=categories.filter(c=>c.id!==id);saveData();renderCats();markDirty();
   showToast('🗑️ تم حذف الفئة');
 }
 
 // ===== SETTINGS =====
 function saveSettings(){
-  settings = {
+  settings={
     site_name:document.getElementById('s-name').value,
     site_tagline:document.getElementById('s-tagline').value,
     hero_title:document.getElementById('s-hero-title').value,
@@ -570,59 +649,76 @@ function saveSettings(){
     accent_color:document.getElementById('s-accent').value,
     footer_text:document.getElementById('s-footer').value,
   };
-  saveData(); markDirty();
-  showToast('✅ تم حفظ الإعدادات');
+  saveData();markDirty();showToast('✅ تم حفظ الإعدادات');
+}
+
+// ===== DRAG & DROP =====
+let dragSrcId=null,dragType=null;
+function dragStart(e){dragSrcId=e.currentTarget.dataset.id;dragType=e.currentTarget.dataset.type;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
+function dragOver(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
+function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
+function dragEnd(e){document.querySelectorAll('.dragging,.drag-over').forEach(el=>el.classList.remove('dragging','drag-over'));}
+function dropItem(e){
+  e.preventDefault();
+  const targetId=e.currentTarget.dataset.id;
+  if(dragSrcId===targetId)return;
+  if(dragType==='product'){
+    const from=products.findIndex(p=>String(p.id)===dragSrcId);
+    const to=products.findIndex(p=>String(p.id)===targetId);
+    const [item]=products.splice(from,1);products.splice(to,0,item);
+    saveData();renderProducts();markDirty();
+  } else {
+    const from=categories.findIndex(c=>c.id===dragSrcId);
+    const to=categories.findIndex(c=>c.id===targetId);
+    const [item]=categories.splice(from,1);categories.splice(to,0,item);
+    saveData();renderCats();markDirty();
+  }
+  showToast('✅ تم تغيير الترتيب');
 }
 
 // ===== EXPORT =====
 function exportData(){
-  const data = {
-    products: JSON.stringify(products, null, 2),
-    categories: JSON.stringify(categories, null, 2),
-    settings: JSON.stringify(settings, null, 2)
-  };
-  const text = `=== products.json ===\n${data.products}\n\n=== categories.json ===\n${data.categories}\n\n=== settings.json ===\n${data.settings}`;
-  navigator.clipboard.writeText(text).then(()=>{
-    showToast('✅ تم نسخ البيانات — الصقها في Claude لتحديث GitHub');
-  });
+  const text=`=== products.json ===\n${JSON.stringify(products,null,2)}\n\n=== categories.json ===\n${JSON.stringify(categories,null,2)}\n\n=== settings.json ===\n${JSON.stringify(settings,null,2)}\n\n=== reviews.json ===\n${JSON.stringify(reviews,null,2)}`;
+  navigator.clipboard.writeText(text).then(()=>showToast('✅ تم نسخ البيانات'));
 }
 
-// ===== UTILS =====
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
 // ===== INIT DATA =====
-const INIT_PRODUCTS = [
-  {id:1,name:'Netflix',category:'streaming',icon:'🎬',color:'#1a0a0a',badge:'hot',price:29,period:'/شهر',desc:'أفلام ومسلسلات بلا حدود بجودة 4K',features:['4K Ultra HD','4 شاشات','تحميل للجوال']},
-  {id:2,name:'Spotify Premium',category:'music',icon:'🎵',color:'#0a1a0a',badge:'',price:19,period:'/شهر',desc:'موسيقى وبودكاست بدون إعلانات',features:['بدون إعلانات','تحميل أغاني','صوت عالي الجودة']},
-  {id:3,name:'Adobe Creative',category:'creative',icon:'🎨',color:'#0a0a1a',badge:'new',price:89,period:'/شهر',desc:'فوتوشوب، إليستريتور، وكل أدوات أدوبي',features:['+20 تطبيق','100GB سحابي','تحديثات مجانية']},
-  {id:4,name:'Disney+',category:'streaming',icon:'⭐',color:'#0a0f1f',badge:'',price:24,period:'/شهر',desc:'ديزني، ماربل، ستار وورز، وناشيونال جيوغرافيك',features:['4K + HDR','4 شاشات','محتوى حصري']},
-  {id:5,name:'Microsoft 365',category:'productivity',icon:'💼',color:'#0f0f0a',badge:'',price:35,period:'/شهر',desc:'Word، Excel، PowerPoint والمزيد',features:['6 مستخدمين','1TB OneDrive','تطبيقات موبايل']},
-  {id:6,name:'Xbox Game Pass',category:'gaming',icon:'🎮',color:'#0a1a0a',badge:'hot',price:45,period:'/شهر',desc:'مئات الألعاب الأخيرة لأجهزة Xbox والPC',features:['+100 لعبة','EA Play مجاناً','يوم الإطلاق']},
-  {id:7,name:'YouTube Premium',category:'streaming',icon:'▶️',color:'#1a0a0a',badge:'',price:22,period:'/شهر',desc:'يوتيوب بدون إعلانات مع تحميل الفيديوهات',features:['بدون إعلانات','تشغيل خلفي','يوتيوب ميوزيك']},
-  {id:8,name:'Canva Pro',category:'creative',icon:'✏️',color:'#0a0f1a',badge:'new',price:25,period:'/شهر',desc:'تصاميم احترافية بسهولة وسرعة',features:['قوالب لا محدودة','إزالة خلفية','Brand Kit']},
-  {id:9,name:'Apple TV+',category:'streaming',icon:'🍎',color:'#0f0f0f',badge:'',price:21,period:'/شهر',desc:'مسلسلات وأفلام أصلية من إنتاج Apple',features:['4K Dolby Vision','6 مستخدمين','تجربة مجانية']},
-  {id:10,name:'Duolingo Plus',category:'productivity',icon:'🦜',color:'#0a1a05',badge:'',price:15,period:'/شهر',desc:'تعلم اللغات بدون إعلانات وبميزات متقدمة',features:['بدون إعلانات','درس مخصص','تقارير تقدم']},
-  {id:11,name:'PlayStation Plus',category:'gaming',icon:'🕹️',color:'#0a0a1f',badge:'hot',price:55,period:'/شهر',desc:'العب أونلاين مع ألعاب مجانية شهرية',features:['لعب أونلاين','ألعاب شهرية','خصومات PS Store']},
-  {id:12,name:'Notion AI',category:'productivity',icon:'📝',color:'#0f0a0a',badge:'new',price:18,period:'/شهر',desc:'منظم ملاحظات ذكي مع قدرات الذكاء الاصطناعي',features:['AI كاتب','قواعد بيانات','تعاون فريق']}
+const INIT_PRODUCTS=[
+  {id:1,name:'Netflix',category:'streaming',icon:'🎬',color:'#1a0a0a',badge:'hot',price:29,period:'/شهر',desc:'أفلام ومسلسلات بلا حدود بجودة 4K',features:['4K Ultra HD','4 شاشات','تحميل للجوال'],rating:4.9,reviewCount:234,image:'',imageBase64:''},
+  {id:2,name:'Spotify Premium',category:'music',icon:'🎵',color:'#0a1a0a',badge:'',price:19,period:'/شهر',desc:'موسيقى وبودكاست بدون إعلانات',features:['بدون إعلانات','تحميل أغاني','صوت عالي الجودة'],rating:4.8,reviewCount:189,image:'',imageBase64:''},
+  {id:3,name:'Adobe Creative',category:'creative',icon:'🎨',color:'#0a0a1a',badge:'new',price:89,period:'/شهر',desc:'فوتوشوب، إليستريتور، وكل أدوات أدوبي',features:['+20 تطبيق','100GB سحابي','تحديثات مجانية'],rating:4.7,reviewCount:156,image:'',imageBase64:''},
+  {id:4,name:'Disney+',category:'streaming',icon:'⭐',color:'#0a0f1f',badge:'',price:24,period:'/شهر',desc:'ديزني، ماربل، ستار وورز، وناشيونال جيوغرافيك',features:['4K + HDR','4 شاشات','محتوى حصري'],rating:4.6,reviewCount:98,image:'',imageBase64:''},
+  {id:5,name:'Microsoft 365',category:'productivity',icon:'💼',color:'#0f0f0a',badge:'',price:35,period:'/شهر',desc:'Word، Excel، PowerPoint والمزيد',features:['6 مستخدمين','1TB OneDrive','تطبيقات موبايل'],rating:4.7,reviewCount:203,image:'',imageBase64:''},
+  {id:6,name:'Xbox Game Pass',category:'gaming',icon:'🎮',color:'#0a1a0a',badge:'hot',price:45,period:'/شهر',desc:'مئات الألعاب الأخيرة لأجهزة Xbox والPC',features:['+100 لعبة','EA Play مجاناً','يوم الإطلاق'],rating:4.9,reviewCount:312,image:'',imageBase64:''},
+  {id:7,name:'YouTube Premium',category:'streaming',icon:'▶️',color:'#1a0a0a',badge:'',price:22,period:'/شهر',desc:'يوتيوب بدون إعلانات مع تحميل الفيديوهات',features:['بدون إعلانات','تشغيل خلفي','يوتيوب ميوزيك'],rating:4.5,reviewCount:87,image:'',imageBase64:''},
+  {id:8,name:'Canva Pro',category:'creative',icon:'✏️',color:'#0a0f1a',badge:'new',price:25,period:'/شهر',desc:'تصاميم احترافية بسهولة وسرعة',features:['قوالب لا محدودة','إزالة خلفية','Brand Kit'],rating:4.8,reviewCount:145,image:'',imageBase64:''},
+  {id:9,name:'Apple TV+',category:'streaming',icon:'🍎',color:'#0f0f0f',badge:'',price:21,period:'/شهر',desc:'مسلسلات وأفلام أصلية من إنتاج Apple',features:['4K Dolby Vision','6 مستخدمين','تجربة مجانية'],rating:4.6,reviewCount:76,image:'',imageBase64:''},
+  {id:10,name:'Duolingo Plus',category:'productivity',icon:'🦜',color:'#0a1a05',badge:'',price:15,period:'/شهر',desc:'تعلم اللغات بدون إعلانات وبميزات متقدمة',features:['بدون إعلانات','درس مخصص','تقارير تقدم'],rating:4.7,reviewCount:234,image:'',imageBase64:''},
+  {id:11,name:'PlayStation Plus',category:'gaming',icon:'🕹️',color:'#0a0a1f',badge:'hot',price:55,period:'/شهر',desc:'العب أونلاين مع ألعاب مجانية شهرية',features:['لعب أونلاين','ألعاب شهرية','خصومات PS Store'],rating:4.8,reviewCount:289,image:'',imageBase64:''},
+  {id:12,name:'Notion AI',category:'productivity',icon:'📝',color:'#0f0a0a',badge:'new',price:18,period:'/شهر',desc:'منظم ملاحظات ذكي مع قدرات الذكاء الاصطناعي',features:['AI كاتب','قواعد بيانات','تعاون فريق'],rating:4.9,reviewCount:178,image:'',imageBase64:''}
 ];
-const INIT_CATS = [
-  {id:'streaming',label:'مشاهدة',icon:'📺'},
-  {id:'music',label:'موسيقى',icon:'🎵'},
-  {id:'creative',label:'إبداع',icon:'🎨'},
-  {id:'productivity',label:'إنتاجية',icon:'💼'},
+const INIT_CATS=[
+  {id:'streaming',label:'مشاهدة',icon:'📺'},{id:'music',label:'موسيقى',icon:'🎵'},
+  {id:'creative',label:'إبداع',icon:'🎨'},{id:'productivity',label:'إنتاجية',icon:'💼'},
   {id:'gaming',label:'ألعاب',icon:'🎮'}
 ];
-const INIT_SETTINGS = {
+const INIT_SETTINGS={
   site_name:'DigitalZone',site_tagline:'متجر الاشتراكات الرقمية',
   hero_title:'اشتراكاتك الرقمية في مكان واحد',
   hero_subtitle:'نتفليكس، سبوتيفاي، أدوبي، وأكثر — احصل على اشتراكك فوراً بأفضل الأسعار',
-  stat1_num:'+50',stat1_label:'منتج رقمي',
-  stat2_num:'24/7',stat2_label:'دعم فوري',
-  stat3_num:'99%',stat3_label:'رضا العملاء',
-  accent_color:'#3b82f6',
+  stat1_num:'+50',stat1_label:'منتج رقمي',stat2_num:'24/7',stat2_label:'دعم فوري',
+  stat3_num:'99%',stat3_label:'رضا العملاء',accent_color:'#3b82f6',
   footer_text:'© 2025 DigitalZone — جميع الحقوق محفوظة'
 };
+const INIT_REVIEWS=[
+  {id:1,name:'محمد العتيبي',avatar:'م',stars:5,text:'خدمة ممتازة وتفعيل فوري. أنصح الجميع!',date:'منذ أسبوع',productId:'',visible:true},
+  {id:2,name:'سارة الزهراني',avatar:'س',stars:5,text:'أسعار رائعة ودعم سريع 👏',date:'منذ أسبوعين',productId:'',visible:true},
+  {id:3,name:'عبدالله القحطاني',avatar:'ع',stars:4,text:'تجربة شراء سلسة جداً.',date:'منذ شهر',productId:'',visible:true},
+  {id:4,name:'نورة الشمري',avatar:'ن',stars:5,text:'أفضل متجر للاشتراكات الرقمية!',date:'منذ شهر',productId:'',visible:true}
+];
 </script>
 </body>
 </html>
