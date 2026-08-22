@@ -25,59 +25,51 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .user-menu-item:hover{background:var(--surface2);color:var(--text);}
 .user-menu-item.danger{color:#f87171;}
 
-/* BREADCRUMB */
 .breadcrumb{max-width:1100px;margin:0 auto;padding:16px 1.5rem 0;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
 .breadcrumb a{color:var(--muted);text-decoration:none;}
 .breadcrumb a:hover{color:var(--text);}
 
-/* PRODUCT HERO */
 .product-wrap{max-width:1100px;margin:0 auto;padding:24px 1.5rem 48px;display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:start;}
 .product-visual{background:var(--surface);border:1px solid var(--border);border-radius:20px;height:320px;display:flex;align-items:center;justify-content:center;font-size:100px;position:relative;overflow:hidden;}
 .product-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--prod-color,#1a0a0a) 0%,#080b12 100%);}
+.product-visual img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;}
 .product-emoji{position:relative;z-index:1;animation:float-icon 3s ease-in-out infinite;}
 @keyframes float-icon{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .prod-badge{position:absolute;top:16px;right:16px;z-index:2;font-size:12px;padding:4px 12px;border-radius:20px;font-weight:600;}
 .prod-badge-hot{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#f87171;}
 .prod-badge-new{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#4ade80;}
 
-/* PRODUCT INFO */
 .product-info{}
 .prod-category{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
 .prod-name{font-size:32px;font-weight:700;margin-bottom:12px;line-height:1.2;}
 .prod-desc{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:20px;}
 
-/* RATING */
 .rating-row{display:flex;align-items:center;gap:8px;margin-bottom:20px;}
 .stars{color:#f59e0b;font-size:16px;letter-spacing:2px;}
 .rating-num{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;}
 .rating-count{font-size:13px;color:var(--muted);}
 
-/* PRICE */
 .price-box{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:20px;margin-bottom:20px;}
 .price-main{display:flex;align-items:baseline;gap:6px;margin-bottom:4px;}
 .price-num{font-family:'Space Mono',monospace;font-size:36px;font-weight:700;color:var(--accent);}
 .price-period{font-size:14px;color:var(--muted);}
 .price-note{font-size:12px;color:var(--success);}
 
-/* FEATURES */
 .features-section{margin-bottom:20px;}
 .features-title{font-size:14px;font-weight:600;margin-bottom:10px;}
 .features-list{display:flex;flex-direction:column;gap:8px;}
 .feature-item{display:flex;align-items:center;gap:10px;font-size:14px;}
 .feature-check{width:20px;height:20px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#4ade80;flex-shrink:0;}
 
-/* ACTIONS */
 .btn-buy{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.2s;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-buy:hover{filter:brightness(1.1);transform:translateY(-1px);}
 .btn-buy.added{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3);}
 .btn-cart-add{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:13px;border-radius:12px;font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-cart-add:hover{border-color:var(--accent);color:var(--accent);}
 
-/* TRUST */
 .trust-row{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;}
 .trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
 
-/* TABS */
 .tabs-section{max-width:1100px;margin:0 auto;padding:0 1.5rem 48px;}
 .tabs-nav{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:28px;}
 .tab-btn{background:none;border:none;color:var(--muted);padding:12px 20px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;}
@@ -86,7 +78,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .tab-pane{display:none;}
 .tab-pane.active{display:block;}
 
-/* REVIEWS */
 .reviews-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .big-rating{font-family:'Space Mono',monospace;font-size:48px;font-weight:700;color:var(--accent);}
 .review-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:12px;}
@@ -97,23 +88,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .review-date{font-size:12px;color:var(--muted);}
 .review-stars{color:#f59e0b;font-size:14px;}
 .review-text{font-size:14px;color:var(--muted);line-height:1.6;}
+.no-reviews{text-align:center;padding:40px 0;color:var(--muted);font-size:14px;}
 
-/* RELATED */
 .related-section{max-width:1100px;margin:0 auto;padding:0 1.5rem 48px;}
 .section-title{font-size:20px;font-weight:600;margin-bottom:20px;}
 .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
 .related-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.25s;}
 .related-card:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 16px 40px rgba(0,0,0,0.4);}
-.related-header{height:100px;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.related-header{height:100px;display:flex;align-items:center;justify-content:center;font-size:40px;overflow:hidden;}
+.related-header img{width:100%;height:100%;object-fit:cover;}
 .related-body{padding:14px;}
 .related-name{font-size:14px;font-weight:600;margin-bottom:4px;}
 .related-price{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--accent);}
 
-/* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:12px 20px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s ease;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
-/* CART OVERLAY */
 .cart-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);}
 .cart-overlay.open{display:flex;}
 .cart-panel{background:var(--surface);border-left:1px solid var(--border2);width:380px;max-width:100vw;height:100vh;overflow-y:auto;padding:24px;animation:slideIn 0.3s ease;margin-right:auto;}
@@ -138,7 +128,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .empty-cart{text-align:center;padding:60px 0;color:var(--muted);font-size:14px;}
 .empty-cart div{font-size:48px;margin-bottom:16px;}
 
-/* FOOTER */
 .site-footer{border-top:1px solid var(--border);padding:40px 1.5rem 0;}
 .footer-inner{max-width:1100px;margin:0 auto;}
 .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:32px;}
@@ -238,8 +227,20 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-const app = initializeApp({apiKey:"AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",authDomain:"digitalzone-6a39a.firebaseapp.com",projectId:"digitalzone-6a39a",storageBucket:"digitalzone-6a39a.firebasestorage.app",messagingSenderId:"607143644878",appId:"1:607143644878:web:9f0e734d2e960511c58a9f"});
+import { getFirestore, collection, doc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",
+  authDomain: "digitalzone-6a39a.firebaseapp.com",
+  projectId: "digitalzone-6a39a",
+  storageBucket: "digitalzone-6a39a.firebasestorage.app",
+  messagingSenderId: "607143644878",
+  appId: "1:607143644878:web:9f0e734d2e960511c58a9f"
+};
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
 onAuthStateChanged(auth, user => {
   const el = document.getElementById('nav-auth');
   if(user){
@@ -253,31 +254,37 @@ onAuthStateChanged(auth, user => {
     window.__firebaseUser=null;
   }
 });
-</script>
 
-<script>
-let products=[], categories=[], cart=[], currentProduct=null;
-
-const REVIEWS = [
-  {name:'محمد العتيبي',avatar:'م',stars:5,date:'منذ أسبوع',text:'خدمة ممتازة وتفعيل فوري. أنصح الجميع بالتعامل مع DigitalZone!'},
-  {name:'سارة الزهراني',avatar:'س',stars:5,date:'منذ أسبوعين',text:'أسعار رائعة ودعم سريع. استمر يا DigitalZone 👏'},
-  {name:'عبدالله القحطاني',avatar:'ع',stars:4,date:'منذ شهر',text:'تجربة شراء سلسة جداً، وصلني الاشتراك في دقائق.'},
-  {name:'نورة الشمري',avatar:'ن',stars:5,date:'منذ شهر',text:'أفضل متجر للاشتراكات الرقمية في السعودية بدون منازع!'},
-];
+let products=[], categories=[], cart=[], currentProduct=null, productReviews=[];
 
 async function init() {
   try {
-    const [pRes, cRes] = await Promise.all([fetch('/_data/products.json'), fetch('/_data/categories.json')]);
-    products = await pRes.json();
-    categories = await cRes.json();
+    const prodSnap = await getDocs(query(collection(db,'products'), orderBy('order')));
+    const catSnap = await getDocs(query(collection(db,'categories'), orderBy('order')));
+    products = prodSnap.docs.map(d=>d.data());
+    categories = catSnap.docs.map(d=>d.data());
+    if(!products.length) throw new Error('no products in Firestore yet');
   } catch(e) {
+    console.warn('Firestore load failed, using fallback data:', e.message);
     products = FALLBACK_PRODUCTS;
     categories = FALLBACK_CATS;
   }
+
   const params = new URLSearchParams(location.search);
-  const id = parseInt(params.get('id')) || params.get('id');
+  const idParam = params.get('id');
+  const id = /^\d+$/.test(idParam) ? parseInt(idParam) : idParam;
   currentProduct = products.find(p => p.id == id);
   if (!currentProduct) { document.getElementById('product-wrap').innerHTML = '<div style="text-align:center;padding:80px;color:var(--muted);">المنتج غير موجود</div>'; return; }
+
+  try {
+    const revSnap = await getDocs(query(collection(db,'reviews'), orderBy('order','desc')));
+    productReviews = revSnap.docs.map(d=>d.data())
+      .filter(r => r.visible !== false && (!r.productId || r.productId == currentProduct.id));
+  } catch(e) {
+    console.warn('Firestore reviews load failed:', e.message);
+    productReviews = [];
+  }
+
   renderProduct(currentProduct);
   renderTabs(currentProduct);
   renderRelated(currentProduct);
@@ -285,12 +292,20 @@ async function init() {
   document.getElementById('bc-name').textContent = currentProduct.name;
 }
 
+function getProductVisual(p){
+  if(p.imageBase64) return `<img src="${p.imageBase64}" alt="${p.name}">`;
+  if(p.image) return `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\\'product-emoji\\'>${p.icon||'📦'}</div>')">`;
+  return `<div class="product-emoji">${p.icon||'📦'}</div>`;
+}
+
 function renderProduct(p) {
   const inCart = cart.find(c=>c.id===p.id);
+  const rating = p.rating || (productReviews.length ? (productReviews.reduce((s,r)=>s+(r.stars||5),0)/productReviews.length) : 5);
+  const reviewCount = p.reviewCount || productReviews.length;
   document.getElementById('product-wrap').innerHTML = `
     <div>
       <div class="product-visual" style="--prod-color:${p.color||'#1a0a0a'}">
-        <div class="product-emoji">${p.icon||'📦'}</div>
+        ${getProductVisual(p)}
         ${p.badge==='hot'?'<div class="prod-badge prod-badge-hot">🔥 رائج</div>':''}
         ${p.badge==='new'?'<div class="prod-badge prod-badge-new">✦ جديد</div>':''}
       </div>
@@ -299,9 +314,9 @@ function renderProduct(p) {
       <div class="prod-category">${getCatLabel(p.category)}</div>
       <div class="prod-name">${p.name}</div>
       <div class="rating-row">
-        <div class="stars">★★★★★</div>
-        <div class="rating-num">4.9</div>
-        <div class="rating-count">(${Math.floor(Math.random()*200+50)} تقييم)</div>
+        <div class="stars">${'★'.repeat(Math.round(rating))}${'☆'.repeat(5-Math.round(rating))}</div>
+        <div class="rating-num">${rating.toFixed(1)}</div>
+        <div class="rating-count">(${reviewCount} تقييم)</div>
       </div>
       <div class="prod-desc">${p.desc||''}</div>
       <div class="price-box">
@@ -335,18 +350,21 @@ function renderTabs(p) {
   document.getElementById('tab-details').innerHTML = `
     <div style="color:var(--muted);font-size:15px;line-height:1.8;">${p.desc||''}</div>
     ${p.features&&p.features.length?`<div style="margin-top:20px;"><div style="font-size:15px;font-weight:600;margin-bottom:12px;">المميزات الكاملة</div><div class="features-list">${p.features.map(f=>`<div class="feature-item"><div class="feature-check">✓</div>${f}</div>`).join('')}</div></div>`:''}`;
+
+  const rating = p.rating || (productReviews.length ? (productReviews.reduce((s,r)=>s+(r.stars||5),0)/productReviews.length) : 5);
+  const reviewCount = p.reviewCount || productReviews.length;
   document.getElementById('tab-reviews').innerHTML = `
     <div class="reviews-header">
-      <div><div class="big-rating">4.9</div><div class="stars" style="font-size:20px;">★★★★★</div><div style="font-size:13px;color:var(--muted);margin-top:4px;">${Math.floor(Math.random()*200+50)} تقييم</div></div>
+      <div><div class="big-rating">${rating.toFixed(1)}</div><div class="stars" style="font-size:20px;">${'★'.repeat(Math.round(rating))}${'☆'.repeat(5-Math.round(rating))}</div><div style="font-size:13px;color:var(--muted);margin-top:4px;">${reviewCount} تقييم</div></div>
     </div>
-    ${REVIEWS.map(r=>`
+    ${productReviews.length ? productReviews.map(r=>`
     <div class="review-card">
       <div class="review-top">
-        <div class="reviewer"><div class="reviewer-avatar">${r.avatar}</div><div><div class="reviewer-name">${r.name}</div><div class="review-date">${r.date}</div></div></div>
-        <div class="review-stars">${'★'.repeat(r.stars)}</div>
+        <div class="reviewer"><div class="reviewer-avatar">${r.avatar||r.name[0]}</div><div><div class="reviewer-name">${r.name}</div><div class="review-date">${r.date||''}</div></div></div>
+        <div class="review-stars">${'★'.repeat(r.stars||5)}</div>
       </div>
-      <div class="review-text">${r.text}</div>
-    </div>`).join('')}`;
+      <div class="review-text">${r.text||''}</div>
+    </div>`).join('') : '<div class="no-reviews">لا توجد تقييمات لهذا المنتج بعد</div>'}`;
 }
 
 function renderRelated(p) {
@@ -355,7 +373,7 @@ function renderRelated(p) {
   document.getElementById('related-section').style.display = 'block';
   document.getElementById('related-grid').innerHTML = related.map(r=>`
     <div class="related-card" onclick="window.location.href='/product.html?id=${r.id}'">
-      <div class="related-header" style="background:radial-gradient(ellipse at center,${r.color||'#0f0f0f'} 0%,#080b12 100%)">${r.icon}</div>
+      <div class="related-header" style="background:radial-gradient(ellipse at center,${r.color||'#0f0f0f'} 0%,#080b12 100%)">${r.imageBase64?`<img src="${r.imageBase64}">`:r.image?`<img src="${r.image}">`:r.icon}</div>
       <div class="related-body">
         <div class="related-name">${r.name}</div>
         <div class="related-price">${r.price} ر.س<span style="font-size:11px;color:var(--muted);font-family:inherit;"> ${r.period||'/شهر'}</span></div>
@@ -424,6 +442,10 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 
 const FALLBACK_PRODUCTS=[{id:1,name:'Netflix',category:'streaming',icon:'🎬',color:'#1a0a0a',badge:'hot',price:29,period:'/شهر',desc:'أفلام ومسلسلات بلا حدود بجودة 4K',features:['4K Ultra HD','4 شاشات','تحميل للجوال']},{id:2,name:'Spotify Premium',category:'music',icon:'🎵',color:'#0a1a0a',badge:'',price:19,period:'/شهر',desc:'موسيقى وبودكاست بدون إعلانات',features:['بدون إعلانات','تحميل أغاني','صوت عالي الجودة']},{id:3,name:'Xbox Game Pass',category:'gaming',icon:'🎮',color:'#0a1a0a',badge:'hot',price:45,period:'/شهر',desc:'مئات الألعاب الأخيرة',features:['+100 لعبة','EA Play مجاناً']}];
 const FALLBACK_CATS=[{id:'streaming',label:'مشاهدة',icon:'📺'},{id:'music',label:'موسيقى',icon:'🎵'},{id:'gaming',label:'ألعاب',icon:'🎮'}];
+
+Object.assign(window,{
+  openCart,closeCart,closeCartOnOverlay,switchTab,buyNow,addToCartOnly,removeFromCart,updateQty,checkout
+});
 
 init();
 </script>

@@ -16,7 +16,6 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',sans-serif;min-height:100vh;overflow-x:hidden;}
 
-  /* NAV */
   nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px;}
   .logo{font-family:'Space Mono',monospace;font-size:18px;color:var(--text);white-space:nowrap;flex-shrink:0;}
   .logo span{color:var(--accent);}
@@ -37,7 +36,6 @@
   .user-menu-item:hover{background:var(--surface2);color:var(--text);}
   .user-menu-item.danger{color:#f87171;}
 
-  /* HERO */
   .hero{padding:60px 1.5rem 50px;text-align:center;position:relative;overflow:hidden;}
   .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(59,130,246,0.12) 0%,transparent 70%);pointer-events:none;}
   .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:20px;padding:5px 14px;font-size:12px;color:#93c5fd;margin-bottom:24px;animation:fadeUp 0.5s ease both;}
@@ -48,18 +46,17 @@
   .stat-num{font-family:'Space Mono',monospace;font-size:clamp(20px,4vw,26px);font-weight:700;}
   .stat-lbl{font-size:13px;color:var(--muted);margin-top:4px;}
 
-  /* FILTERS */
   .filters{padding:0 1.5rem 32px;display:flex;gap:8px;flex-wrap:wrap;}
   .filter-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.2s;}
   .filter-btn:hover{border-color:var(--border2);color:var(--text);}
   .filter-btn.active{background:var(--accent);border-color:var(--accent);color:white;}
 
-  /* PRODUCTS */
   .products-grid{padding:0 1.5rem 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;}
   .product-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(30px);transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.25s,box-shadow 0.25s;}
   .product-card.visible{opacity:1;transform:translateY(0);}
   .product-card.visible:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 24px 60px rgba(0,0,0,0.5);}
-  .card-header{height:140px;display:flex;align-items:center;justify-content:center;position:relative;font-size:52px;transition:transform 0.3s ease;}
+  .card-header{height:140px;display:flex;align-items:center;justify-content:center;position:relative;font-size:52px;transition:transform 0.3s ease;overflow:hidden;}
+  .card-header img{width:100%;height:100%;object-fit:cover;}
   .product-card:hover .card-header{transform:scale(1.05);}
   .badge-hot{position:absolute;top:12px;right:12px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#f87171;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
   .badge-new{position:absolute;top:12px;right:12px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#4ade80;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
@@ -77,7 +74,6 @@
   .card-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
   .feature-tag{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:3px 10px;border-radius:20px;}
 
-  /* CART */
   .cart-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);}
   .cart-overlay.open{display:flex;}
   .cart-panel{background:var(--surface);border-left:1px solid var(--border2);width:380px;max-width:100vw;height:100vh;overflow-y:auto;padding:24px;animation:slideIn 0.3s ease;margin-right:auto;}
@@ -103,19 +99,16 @@
   .empty-cart{text-align:center;padding:60px 0;color:var(--muted);font-size:14px;}
   .empty-cart div{font-size:48px;margin-bottom:16px;}
 
-  /* TOAST */
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:12px 20px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s ease;white-space:nowrap;}
   .toast.show{transform:translateX(-50%) translateY(0);}
 
-  /* PARTICLES */
   .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
   .particle{position:absolute;border-radius:50%;opacity:0;animation:float linear infinite;}
   @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:0.15;}90%{opacity:0.05;}100%{transform:translateY(-100px) scale(1);opacity:0;}}
 
-  .loading{text-align:center;padding:80px;color:var(--muted);}
+  .loading{text-align:center;padding:80px;color:var(--muted);grid-column:1/-1;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ===== FOOTER ===== */
   .site-footer{border-top:1px solid var(--border);padding:40px 1.5rem 0;position:relative;z-index:1;}
   .footer-inner{max-width:1100px;margin:0 auto;}
   .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:32px;}
@@ -129,14 +122,8 @@
   .footer-divider{height:1px;background:var(--border);margin-bottom:20px;}
   .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-bottom:24px;}
   .footer-copy{font-size:12px;color:var(--muted);}
-  /* أيقونات الدفع */
   .pay-methods{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  .pay-badge{display:flex;align-items:center;gap:6px;background:white;border-radius:8px;padding:5px 10px;height:32px;}
-  .pay-badge-applepay{background:#000;}
-  .pay-badge svg{display:block;}
-  .pay-badge-text{font-size:12px;font-weight:700;line-height:1;}
 
-  /* MOBILE */
   @media(max-width:640px){
     nav{padding:0 1rem;height:56px;}
     .nav-links{display:none;}
@@ -199,7 +186,6 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -233,33 +219,33 @@
     </div>
     <div class="footer-divider"></div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 DigitalZone — جميع الحقوق محفوظة</div>
-              <div class="pay-methods">
-          <div style="background:#000;border-radius:8px;padding:0 12px;height:32px;display:flex;align-items:center;font-family:-apple-system,Arial;font-size:13px;color:white;gap:3px;white-space:nowrap;">
-            <span style="font-size:15px;"></span> Pay
-          </div>
-          <div style="background:#fff;border-radius:8px;height:32px;display:flex;align-items:center;border:1px solid #ddd;overflow:hidden;">
-            <div style="background:#006837;padding:0 8px;height:100%;display:flex;align-items:center;font-family:Arial;font-weight:900;font-size:13px;color:white;">مدى</div>
-            <div style="padding:0 8px;font-family:Arial;font-weight:900;font-size:12px;color:#006837;">mada</div>
-          </div>
-          <div style="background:#1a1f71;border-radius:8px;padding:0 12px;height:32px;display:flex;align-items:center;font-family:Arial;font-weight:900;font-size:16px;color:white;letter-spacing:-0.5px;">VISA</div>
-          <div style="background:#fff;border-radius:8px;padding:0 8px;height:32px;display:flex;align-items:center;border:1px solid #ddd;">
-            <svg width="40" height="24" viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="17" cy="15" r="13" fill="#EB001B"/>
-              <circle cx="33" cy="15" r="13" fill="#F79E1B"/>
-              <path d="M25 5.3a13 13 0 0 1 0 19.4A13 13 0 0 1 25 5.3z" fill="#FF5F00"/>
-            </svg>
-          </div>
+      <div class="footer-copy" id="footer-copy">© 2025 DigitalZone — جميع الحقوق محفوظة</div>
+      <div class="pay-methods">
+        <div style="background:#000;border-radius:8px;padding:0 12px;height:32px;display:flex;align-items:center;font-family:-apple-system,Arial;font-size:13px;color:white;gap:3px;white-space:nowrap;">
+          <span style="font-size:15px;"></span> Pay
+        </div>
+        <div style="background:#fff;border-radius:8px;height:32px;display:flex;align-items:center;border:1px solid #ddd;overflow:hidden;">
+          <div style="background:#006837;padding:0 8px;height:100%;display:flex;align-items:center;font-family:Arial;font-weight:900;font-size:13px;color:white;">مدى</div>
+          <div style="padding:0 8px;font-family:Arial;font-weight:900;font-size:12px;color:#006837;">mada</div>
+        </div>
+        <div style="background:#1a1f71;border-radius:8px;padding:0 12px;height:32px;display:flex;align-items:center;font-family:Arial;font-weight:900;font-size:16px;color:white;letter-spacing:-0.5px;">VISA</div>
+        <div style="background:#fff;border-radius:8px;padding:0 8px;height:32px;display:flex;align-items:center;border:1px solid #ddd;">
+          <svg width="40" height="24" viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="17" cy="15" r="13" fill="#EB001B"/>
+            <circle cx="33" cy="15" r="13" fill="#F79E1B"/>
+            <path d="M25 5.3a13 13 0 0 1 0 19.4A13 13 0 0 1 25 5.3z" fill="#FF5F00"/>
+          </svg>
         </div>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- Firebase Auth -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",
   authDomain: "digitalzone-6a39a.firebaseapp.com",
@@ -270,6 +256,8 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
 onAuthStateChanged(auth, user => {
   const el = document.getElementById('nav-auth');
   if (user) {
@@ -283,9 +271,7 @@ onAuthStateChanged(auth, user => {
     window.__firebaseUser = null;
   }
 });
-</script>
 
-<script>
 let products = [], categories = [], cart = [], currentFilter = 'all';
 
 (function(){
@@ -310,18 +296,23 @@ const observer = new IntersectionObserver((entries) => {
 
 async function loadData() {
   try {
-    const [pRes, cRes, sRes] = await Promise.all([
-      fetch('/_data/products.json'),
-      fetch('/_data/categories.json'),
-      fetch('/_data/settings.json')
-    ]);
-    products = await pRes.json();
-    categories = await cRes.json();
-    const settings = await sRes.json();
+    const prodSnap = await getDocs(query(collection(db,'products'), orderBy('order')));
+    const catSnap = await getDocs(query(collection(db,'categories'), orderBy('order')));
+    const settingsSnap = await getDoc(doc(db,'settings','site'));
+
+    const fetchedProducts = prodSnap.docs.map(d=>d.data());
+    const fetchedCategories = catSnap.docs.map(d=>d.data());
+
+    if(!fetchedProducts.length) throw new Error('no products in Firestore yet');
+
+    products = fetchedProducts;
+    categories = fetchedCategories;
+    const settings = settingsSnap.exists() ? settingsSnap.data() : {};
     applySettings(settings);
     renderFilters();
     renderProducts('all');
   } catch(e) {
+    console.warn('Firestore load failed, using fallback data:', e.message);
     products = FALLBACK_PRODUCTS;
     categories = FALLBACK_CATS;
     renderFilters();
@@ -339,7 +330,7 @@ function applySettings(s) {
   if(s.stat2_label) document.getElementById('s2l').textContent = s.stat2_label;
   if(s.stat3_num) document.getElementById('s3n').textContent = s.stat3_num;
   if(s.stat3_label) document.getElementById('s3l').textContent = s.stat3_label;
-  if(s.footer_text) document.getElementById('footer-copy') && (document.getElementById('footer-copy').textContent = s.footer_text);
+  if(s.footer_text) document.getElementById('footer-copy').textContent = s.footer_text;
   if(s.accent_color) document.documentElement.style.setProperty('--accent', s.accent_color);
 }
 
@@ -349,6 +340,12 @@ function renderFilters() {
     categories.map(c => `<button class="filter-btn" onclick="filterProducts('${c.id}',this)">${c.icon} ${c.label}</button>`).join('');
 }
 
+function getProductImg(p){
+  if(p.imageBase64) return `<img src="${p.imageBase64}" alt="${p.name}">`;
+  if(p.image) return `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.textContent='${p.icon||'📦'}'">`;
+  return p.icon||'📦';
+}
+
 function renderProducts(filter='all') {
   const grid = document.getElementById('products-grid');
   const filtered = filter==='all' ? products : products.filter(p=>p.category===filter);
@@ -356,7 +353,7 @@ function renderProducts(filter='all') {
   grid.innerHTML = filtered.map((p,i) => `
     <div class="product-card" style="transition-delay:${i*0.05}s" onclick="goToProduct(${p.id})">
       <div class="card-header" style="background:radial-gradient(ellipse at center,${p.color||'#0f0f0f'} 0%,#080b12 100%)">
-        ${p.icon||'📦'}
+        ${getProductImg(p)}
         ${p.badge==='hot'?'<div class="badge-hot">🔥 رائج</div>':''}
         ${p.badge==='new'?'<div class="badge-new">✦ جديد</div>':''}
       </div>
@@ -458,6 +455,11 @@ const FALLBACK_CATS = [
   {id:'music',label:'موسيقى',icon:'🎵'},
   {id:'gaming',label:'ألعاب',icon:'🎮'},
 ];
+
+Object.assign(window,{
+  filterProducts,addToCart,removeFromCart,updateQty,openCart,closeCart,closeCartOnOverlay,
+  checkout,goToProduct
+});
 
 loadData();
 </script>

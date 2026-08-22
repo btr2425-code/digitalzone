@@ -72,7 +72,6 @@
   .ot-num{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--accent);}
   .trust-items{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
   .trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);}
-  /* Payment icons */
   .payment-icons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
   .pay-icon{background:white;border-radius:6px;padding:4px 8px;display:flex;align-items:center;justify-content:center;height:28px;}
   .pay-icon img{height:18px;object-fit:contain;}
@@ -98,7 +97,6 @@
   .btn-home{background:var(--accent);color:white;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;text-decoration:none;display:inline-block;}
   .spinner{display:none;width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg)}}
-  /* FOOTER */
   .site-footer{border-top:1px solid var(--border);padding:32px 1.5rem;margin-top:20px;}
   .footer-inner{max-width:1000px;margin:0 auto;}
   .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:24px;}
@@ -244,7 +242,6 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -296,11 +293,10 @@
   <a href="/" class="btn-home">العودة للمتجر</a>
 </div>
 
-<!-- Firebase للطلبات -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",
@@ -315,7 +311,31 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-onAuthStateChanged(auth, user => { window.__fbUser = user; window.__fbDb = db; });
+let fbUser = null;
+onAuthStateChanged(auth, user => { fbUser = user; });
+
+// ===== حفظ الطلب في Firestore =====
+window.__saveOrderToFirestore = async function(orderId, items, total){
+  if(!fbUser) return; // زائر بدون تسجيل دخول (لا يفترض يوصل هنا لأن checkout يتطلب دخول أصلاً)
+  try{
+    const order = {
+      orderId,
+      userId: fbUser.uid,
+      userEmail: fbUser.email||'',
+      userName: fbUser.displayName||'',
+      userPhone: fbUser.phoneNumber||'',
+      items,
+      total,
+      status:'مكتمل',
+      createdAt: new Date().toISOString()
+    };
+    await addDoc(collection(db,'orders'), order);
+    // نحفظ رقم الطلب داخل بروفايل المستخدم (setDoc مع merge حتى لو المستند غير موجود بعد)
+    await setDoc(doc(db,'users',fbUser.uid), { orders: arrayUnion(orderId) }, { merge:true });
+  }catch(e){
+    console.error('order save error:', e);
+  }
+};
 </script>
 
 <script>
@@ -447,35 +467,16 @@ async function finishPayment() {
   const orderId = 'DZ-'+Math.random().toString(36).slice(2,8).toUpperCase();
   const total = cartItems.reduce((s,p)=>s+(p.price*(p.qty||1)),0);
 
-  // حفظ الطلب في Firebase
-  try {
-    if(window.__fbDb && window.__fbUser) {
-      const order = {
-        orderId,
-        userId: window.__fbUser.uid,
-        userEmail: window.__fbUser.email||'',
-        userName: window.__fbUser.displayName||'',
-        userPhone: window.__fbUser.phoneNumber||'',
-        items: cartItems,
-        total,
-        status: 'مكتمل',
-        createdAt: new Date().toISOString()
-      };
-      // حفظ في مجموعة orders
-      await window.__fbDb.collection ? null : null;
-      const { collection, addDoc, doc, updateDoc, arrayUnion } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-      await addDoc(collection(window.__fbDb,'orders'), order);
-      // إضافة رقم الطلب لبروفايل المستخدم
-      await updateDoc(doc(window.__fbDb,'users',window.__fbUser.uid), {
-        orders: arrayUnion(orderId)
-      });
-    }
-  } catch(e) { console.log('order save error:', e); }
+  if (window.__saveOrderToFirestore) {
+    await window.__saveOrderToFirestore(orderId, cartItems, total);
+  }
 
   localStorage.removeItem('dz_cart');
   document.getElementById('order-id-display').textContent = 'رقم الطلب: #'+orderId;
   document.getElementById('success-overlay').classList.add('show');
 }
+
+Object.assign(window,{switchTab,changeQty,removeItem,processPayment,handleApplePay});
 
 loadCart();
 </script>

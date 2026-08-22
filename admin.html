@@ -19,6 +19,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',s
 .login-input::placeholder{letter-spacing:0;color:var(--muted);}
 .login-input:focus{border-color:var(--accent);}
 .btn-login{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:13px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;}
+.btn-login:disabled{opacity:0.6;cursor:not-allowed;}
 .login-err{color:var(--error);font-size:13px;margin-top:10px;display:none;}
 
 .main-wrap{display:none;}
@@ -44,7 +45,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .section-title{font-size:18px;font-weight:600;}
 
-/* PRODUCTS TABLE */
 .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
 .table-head{display:grid;grid-template-columns:24px 56px 1fr 90px 70px 70px 100px;gap:10px;padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);font-weight:500;}
 .table-row{display:grid;grid-template-columns:24px 56px 1fr 90px 70px 70px 100px;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background 0.15s;}
@@ -69,7 +69,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .btn-del{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#f87171;padding:5px 8px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;}
 .btn-del:hover{background:rgba(239,68,68,0.18);}
 
-/* CATS */
 .cats-grid{display:flex;flex-direction:column;gap:10px;}
 .cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;}
 .cat-card.drag-over{border-top:2px solid var(--accent);}
@@ -79,7 +78,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .cat-id{font-size:12px;color:var(--muted);margin-top:2px;}
 .cat-actions{display:flex;gap:6px;}
 
-/* SETTINGS */
 .settings-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;}
 .settings-title{font-size:15px;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
 .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
@@ -89,7 +87,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .field-input:focus{border-color:var(--accent);}
 .field-full{grid-column:1/-1;}
 
-/* IMAGE UPLOAD */
 .img-upload-wrap{display:flex;gap:12px;align-items:flex-start;}
 .img-preview{width:80px;height:80px;border-radius:12px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden;flex-shrink:0;}
 .img-preview img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
@@ -98,7 +95,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .btn-upload:hover{border-color:var(--accent);color:var(--accent);}
 .img-or{text-align:center;font-size:12px;color:var(--muted);}
 
-/* REVIEWS */
 .reviews-wrap{display:flex;flex-direction:column;gap:12px;}
 .review-card-admin{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
 .review-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
@@ -115,7 +111,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .btn-add-review{background:var(--surface);border:1px dashed var(--border2);color:var(--muted);padding:12px;border-radius:10px;font-size:13px;cursor:pointer;font-family:inherit;width:100%;transition:all 0.2s;}
 .btn-add-review:hover{border-color:var(--accent);color:var(--accent);}
 
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1rem;}
 .modal-overlay.open{display:flex;}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;padding:28px;}
@@ -131,7 +126,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .btn-rm-feature{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 6px;line-height:1;}
 .btn-rm-feature:hover{color:#f87171;}
 
-/* RATING CONTROL */
 .rating-control{display:flex;align-items:center;gap:12px;}
 .stars-input{display:flex;gap:4px;}
 .star-inp{font-size:24px;cursor:pointer;opacity:0.3;transition:all 0.15s;}
@@ -142,9 +136,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:12px 20px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
-.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border2);padding:14px 24px;display:none;align-items:center;justify-content:space-between;z-index:150;}
-.save-bar.show{display:flex;}
-.save-bar-text{font-size:14px;color:var(--muted);}
+.sync-badge{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
 
 @media(max-width:640px){
   .table-head,.table-row{grid-template-columns:24px 44px 1fr 80px;}
@@ -158,10 +151,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 <div class="login-wrap" id="login-wrap">
   <div class="login-card">
     <div class="login-logo">Digital<span>Zone</span></div>
-    <div class="login-sub">لوحة التحكم — أدخل كلمة المرور</div>
+    <div class="login-sub">لوحة التحكم — أدخل كلمة مرور حساب الأدمن</div>
     <input type="password" class="login-input" id="pass-input" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="btn-login" onclick="doLogin()">دخول</button>
-    <div class="login-err" id="login-err">كلمة المرور غير صحيحة</div>
+    <button class="btn-login" id="login-btn" onclick="doLogin()">دخول</button>
+    <div class="login-err" id="login-err">كلمة المرور غير صحيحة أو حساب الأدمن غير موجود</div>
   </div>
 </div>
 
@@ -169,6 +162,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
   <nav>
     <div class="nav-logo">Digital<span>Zone</span> <span style="color:var(--muted);font-size:12px;margin-right:8px;">لوحة التحكم</span></div>
     <div class="nav-actions">
+      <div class="sync-badge"><span class="sync-dot"></span> متصل بـ Firestore</div>
       <a href="/" class="btn-sm" target="_blank">🌐 الموقع</a>
       <button class="btn-sm" onclick="doLogout()">خروج</button>
     </div>
@@ -182,7 +176,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       <button class="tab" onclick="switchTab('settings',this)">⚙️ الإعدادات</button>
     </div>
 
-    <!-- PRODUCTS -->
     <div class="tab-content active" id="tab-products">
       <div class="section-header">
         <div class="section-title">المنتجات <span id="prod-count" style="color:var(--muted);font-size:14px;font-weight:400;"></span></div>
@@ -200,7 +193,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       </div>
     </div>
 
-    <!-- CATEGORIES -->
     <div class="tab-content" id="tab-categories">
       <div class="section-header">
         <div class="section-title">الفئات</div>
@@ -209,7 +201,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       <div class="cats-grid" id="cats-list"></div>
     </div>
 
-    <!-- REVIEWS -->
     <div class="tab-content" id="tab-reviews">
       <div class="section-header">
         <div class="section-title">التقييمات</div>
@@ -218,23 +209,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       <div class="reviews-wrap" id="reviews-list"></div>
     </div>
 
-    <!-- SETTINGS -->
     <div class="tab-content" id="tab-settings">
       <div class="settings-card">
         <div class="settings-title">إعدادات الموقع</div>
         <div class="field-grid">
-          <div class="field-group"><label class="field-label">اسم المتجر</label><input class="field-input" id="s-name" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">الوصف المختصر</label><input class="field-input" id="s-tagline" oninput="markDirty()"></div>
-          <div class="field-group field-full"><label class="field-label">عنوان الهيرو</label><input class="field-input" id="s-hero-title" oninput="markDirty()"></div>
-          <div class="field-group field-full"><label class="field-label">نص الهيرو</label><input class="field-input" id="s-hero-sub" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">إحصائية 1 — رقم</label><input class="field-input" id="s-s1n" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">إحصائية 1 — تسمية</label><input class="field-input" id="s-s1l" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">إحصائية 2 — رقم</label><input class="field-input" id="s-s2n" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">إحصائية 2 — تسمية</label><input class="field-input" id="s-s2l" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">إحصائية 3 — رقم</label><input class="field-input" id="s-s3n" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">إحصائية 3 — تسمية</label><input class="field-input" id="s-s3l" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">لون الموقع الرئيسي</label><input class="field-input" id="s-accent" type="color" oninput="markDirty()"></div>
-          <div class="field-group"><label class="field-label">نص الفوتر</label><input class="field-input" id="s-footer" oninput="markDirty()"></div>
+          <div class="field-group"><label class="field-label">اسم المتجر</label><input class="field-input" id="s-name"></div>
+          <div class="field-group"><label class="field-label">الوصف المختصر</label><input class="field-input" id="s-tagline"></div>
+          <div class="field-group field-full"><label class="field-label">عنوان الهيرو</label><input class="field-input" id="s-hero-title"></div>
+          <div class="field-group field-full"><label class="field-label">نص الهيرو</label><input class="field-input" id="s-hero-sub"></div>
+          <div class="field-group"><label class="field-label">إحصائية 1 — رقم</label><input class="field-input" id="s-s1n"></div>
+          <div class="field-group"><label class="field-label">إحصائية 1 — تسمية</label><input class="field-input" id="s-s1l"></div>
+          <div class="field-group"><label class="field-label">إحصائية 2 — رقم</label><input class="field-input" id="s-s2n"></div>
+          <div class="field-group"><label class="field-label">إحصائية 2 — تسمية</label><input class="field-input" id="s-s2l"></div>
+          <div class="field-group"><label class="field-label">إحصائية 3 — رقم</label><input class="field-input" id="s-s3n"></div>
+          <div class="field-group"><label class="field-label">إحصائية 3 — تسمية</label><input class="field-input" id="s-s3l"></div>
+          <div class="field-group"><label class="field-label">لون الموقع الرئيسي</label><input class="field-input" id="s-accent" type="color"></div>
+          <div class="field-group"><label class="field-label">نص الفوتر</label><input class="field-input" id="s-footer"></div>
         </div>
       </div>
       <div style="display:flex;justify-content:flex-end;">
@@ -244,7 +234,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="prod-modal">
   <div class="modal">
     <div class="modal-title">
@@ -252,7 +241,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       <button class="btn-sm" onclick="closeModal('prod-modal')">✕</button>
     </div>
     <div class="modal-fields">
-      <!-- صورة المنتج -->
       <div class="field-group">
         <label class="field-label">صورة المنتج</label>
         <div class="img-upload-wrap">
@@ -264,7 +252,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
             <input type="file" id="img-file-input" accept="image/*" style="display:none;" onchange="handleImageFile(this)">
             <div class="img-or">— أو —</div>
             <input class="field-input" id="p-image" placeholder="رابط الصورة URL" oninput="previewImageUrl(this.value)" style="font-size:12px;">
-            <div style="font-size:11px;color:var(--muted);">اتركه فارغاً لاستخدام الإيموجي</div>
+            <div style="font-size:11px;color:var(--muted);">اتركه فارغاً لاستخدام الإيموجي. الصور المرفوعة من الجهاز (base64) يفضل تكون صغيرة الحجم حتى لا تُبطئ التحميل.</div>
           </div>
         </div>
       </div>
@@ -321,7 +309,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
   </div>
 </div>
 
-<!-- CAT MODAL -->
 <div class="modal-overlay" id="cat-modal">
   <div class="modal">
     <div class="modal-title">
@@ -340,45 +327,109 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
   </div>
 </div>
 
-<div class="save-bar" id="save-bar">
-  <div class="save-bar-text">⚠️ عندك تغييرات غير محفوظة — انسخ البيانات وحدّث ملفات GitHub</div>
-  <button class="btn-sm btn-primary" onclick="exportData()">📋 نسخ البيانات</button>
-</div>
-
 <div class="toast" id="toast"></div>
 
-<script>
-const PASS = 'dz-admin-2025';
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc,
+  updateDoc, deleteDoc, writeBatch, query, orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ==== إعداد Firebase (نفس المشروع المستخدم بالموقع) ====
+const firebaseConfig = {
+  apiKey: "AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",
+  authDomain: "digitalzone-6a39a.firebaseapp.com",
+  projectId: "digitalzone-6a39a",
+  storageBucket: "digitalzone-6a39a.firebasestorage.app",
+  messagingSenderId: "607143644878",
+  appId: "1:607143644878:web:9f0e734d2e960511c58a9f"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ⚠️ غيّر هذا الإيميل ليطابق حساب الأدمن اللي تسويه في Firebase Authentication
+const ADMIN_EMAIL = 'admin@digitalzone.sa';
+
 let products=[], categories=[], settings={}, reviews=[];
 let editingProdId=null, editingCatId=null, currentStars=5, currentImgBase64='';
+let dragSrcId=null, dragType=null;
 
 // ===== AUTH =====
-function doLogin(){
+async function doLogin(){
   const v=document.getElementById('pass-input').value;
-  if(v===PASS){document.getElementById('login-wrap').style.display='none';document.getElementById('main-wrap').style.display='block';loadData();}
-  else{document.getElementById('login-err').style.display='block';}
+  const btn=document.getElementById('login-btn');
+  const err=document.getElementById('login-err');
+  err.style.display='none';
+  if(!v){return;}
+  btn.disabled=true; btn.textContent='...جاري الدخول';
+  try{
+    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, v);
+    document.getElementById('login-wrap').style.display='none';
+    document.getElementById('main-wrap').style.display='block';
+    await loadData();
+  }catch(e){
+    err.textContent = e.code==='auth/too-many-requests'
+      ? 'محاولات كثيرة، حاول بعد شوي'
+      : 'كلمة المرور غير صحيحة أو حساب الأدمن غير موجود';
+    err.style.display='block';
+  }finally{
+    btn.disabled=false; btn.textContent='دخول';
+  }
 }
 function doLogout(){
+  signOut(auth);
   document.getElementById('login-wrap').style.display='flex';
   document.getElementById('main-wrap').style.display='none';
   document.getElementById('pass-input').value='';
 }
 
-// ===== DATA =====
-function loadData(){
-  products=JSON.parse(localStorage.getItem('dz_products')||'null')||INIT_PRODUCTS;
-  categories=JSON.parse(localStorage.getItem('dz_categories')||'null')||INIT_CATS;
-  settings=JSON.parse(localStorage.getItem('dz_settings')||'null')||INIT_SETTINGS;
-  reviews=JSON.parse(localStorage.getItem('dz_reviews')||'null')||INIT_REVIEWS;
-  renderAll();
+// ===== DATA: تحميل من Firestore =====
+async function loadData(){
+  try{
+    let prodSnap = await getDocs(query(collection(db,'products'), orderBy('order')));
+    if(prodSnap.empty){
+      await seedInitialData();
+      prodSnap = await getDocs(query(collection(db,'products'), orderBy('order')));
+    }
+    products = prodSnap.docs.map(d=>({...d.data(), _docId:d.id}));
+
+    const catSnap = await getDocs(query(collection(db,'categories'), orderBy('order')));
+    categories = catSnap.docs.map(d=>({...d.data(), _docId:d.id}));
+
+    const revSnap = await getDocs(query(collection(db,'reviews'), orderBy('order','desc')));
+    reviews = revSnap.docs.map(d=>({...d.data(), _docId:d.id}));
+
+    const settingsSnap = await getDoc(doc(db,'settings','site'));
+    settings = settingsSnap.exists() ? settingsSnap.data() : INIT_SETTINGS;
+
+    renderAll();
+  }catch(e){
+    showToast('❌ خطأ بالاتصال بـ Firestore: '+e.message);
+    console.error(e);
+  }
 }
-function saveData(){
-  localStorage.setItem('dz_products',JSON.stringify(products));
-  localStorage.setItem('dz_categories',JSON.stringify(categories));
-  localStorage.setItem('dz_settings',JSON.stringify(settings));
-  localStorage.setItem('dz_reviews',JSON.stringify(reviews));
+
+async function seedInitialData(){
+  const batch = writeBatch(db);
+  INIT_PRODUCTS.forEach((p,i)=>{
+    batch.set(doc(db,'products',String(p.id)), {...p, order:i});
+  });
+  INIT_CATS.forEach((c,i)=>{
+    batch.set(doc(db,'categories',c.id), {...c, order:i});
+  });
+  INIT_REVIEWS.forEach((r,i)=>{
+    const {id, ...rest} = r;
+    batch.set(doc(collection(db,'reviews')), {...rest, order: Date.now()-i});
+  });
+  batch.set(doc(db,'settings','site'), INIT_SETTINGS);
+  await batch.commit();
+  showToast('✅ تم تجهيز قاعدة البيانات لأول مرة');
 }
-function markDirty(){document.getElementById('save-bar').classList.add('show');}
+
+function markDirty(){/* لم يعد مطلوب — كل تعديل يُحفظ فوراً على Firestore */}
 
 // ===== TABS =====
 function switchTab(name,el){
@@ -437,9 +488,9 @@ function renderReviews(){
         <div class="review-meta">
           <div class="reviewer-avatar-sm">${r.avatar||r.name[0]}</div>
           <div>
-            <div class="reviewer-name-sm"><input class="field-input" value="${r.name}" onchange="reviews[${i}].name=this.value;saveData();" style="padding:4px 8px;font-size:13px;width:140px;"></div>
+            <div class="reviewer-name-sm"><input class="field-input" value="${r.name}" onchange="updateReviewField(${i},'name',this.value)" style="padding:4px 8px;font-size:13px;width:140px;"></div>
             <div class="review-prod">
-              <select style="background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:2px 6px;border-radius:6px;font-size:11px;font-family:inherit;" onchange="reviews[${i}].productId=this.value;saveData();">
+              <select style="background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:2px 6px;border-radius:6px;font-size:11px;font-family:inherit;" onchange="updateReviewField(${i},'productId',this.value)">
                 <option value="">— كل المنتجات —</option>
                 ${products.map(p=>`<option value="${p.id}" ${r.productId==p.id?'selected':''}>${p.name}</option>`).join('')}
               </select>
@@ -452,30 +503,46 @@ function renderReviews(){
         ${[1,2,3,4,5].map(s=>`<button class="star-btn" onclick="setReviewStars(${i},${s})" style="color:${s<=(r.stars||5)?'#f59e0b':'#374151'}">${s<=(r.stars||5)?'★':'☆'}</button>`).join('')}
         <span style="font-size:12px;color:var(--muted);margin-right:6px;">${r.stars||5}/5</span>
       </div>
-      <textarea class="review-text-input" onchange="reviews[${i}].text=this.value;saveData();">${r.text}</textarea>
+      <textarea class="review-text-input" onchange="updateReviewField(${i},'text',this.value)">${r.text}</textarea>
       <div style="display:flex;gap:8px;margin-top:8px;align-items:center;">
-        <input class="field-input" value="${r.date}" onchange="reviews[${i}].date=this.value;saveData();" style="padding:4px 8px;font-size:12px;width:120px;" placeholder="التاريخ">
+        <input class="field-input" value="${r.date}" onchange="updateReviewField(${i},'date',this.value)" style="padding:4px 8px;font-size:12px;width:120px;" placeholder="التاريخ">
         <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px;">
-          <input type="checkbox" ${r.visible!==false?'checked':''} onchange="reviews[${i}].visible=this.checked;saveData();renderReviews();"> ظاهر للعملاء
+          <input type="checkbox" ${r.visible!==false?'checked':''} onchange="updateReviewField(${i},'visible',this.checked)"> ظاهر للعملاء
         </label>
       </div>
     </div>`).join('')+`<button class="btn-add-review" onclick="addNewReview()">+ إضافة تقييم جديد</button>`;
 }
 
-function addNewReview(){
-  reviews.unshift({id:Date.now(),name:'عميل جديد',avatar:'ع',stars:5,text:'تقييم رائع!',date:'منذ يوم',productId:'',visible:true});
-  saveData();renderReviews();markDirty();
-  showToast('✅ تم إضافة تقييم');
+async function addNewReview(){
+  const newReview={name:'عميل جديد',avatar:'ع',stars:5,text:'تقييم رائع!',date:'منذ يوم',productId:'',visible:true,order:Date.now()};
+  try{
+    const ref=await addDoc(collection(db,'reviews'), newReview);
+    reviews.unshift({...newReview,_docId:ref.id});
+    renderReviews();
+    showToast('✅ تم إضافة تقييم');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
-function deleteReview(i){
+async function deleteReview(i){
   if(!confirm('حذف التقييم؟'))return;
-  reviews.splice(i,1);saveData();renderReviews();markDirty();
-  showToast('🗑️ تم حذف التقييم');
+  try{
+    await deleteDoc(doc(db,'reviews',reviews[i]._docId));
+    reviews.splice(i,1);renderReviews();
+    showToast('🗑️ تم حذف التقييم');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
-function setReviewStars(i,s){
-  reviews[i].stars=s;saveData();renderReviews();
+async function updateReviewField(i,field,value){
+  reviews[i][field]=value;
+  try{
+    await updateDoc(doc(db,'reviews',reviews[i]._docId), {[field]:value});
+    if(field==='visible'||field==='stars') renderReviews();
+  }catch(e){showToast('❌ خطأ: '+e.message);}
+}
+
+async function setReviewStars(i,s){
+  await updateReviewField(i,'stars',s);
+  renderReviews();
 }
 
 function renderSettings(){
@@ -508,15 +575,12 @@ function handleImageFile(input){
   };
   reader.readAsDataURL(file);
 }
-
 function previewImageUrl(url){
   currentImgBase64='';
   updateImgPreview(url||null);
 }
-
 function updateImgPreview(src){
   const wrap=document.getElementById('img-preview-wrap');
-  const emoji=document.getElementById('img-preview-emoji');
   if(src){
     wrap.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" onerror="this.parentElement.innerHTML='<span id=img-preview-emoji>📦</span>'">`;
   } else {
@@ -556,7 +620,6 @@ function openProductModal(id=null){
   document.getElementById('p-review-count').value=p?.reviewCount||'';
   currentStars=p?.rating||5;
   document.querySelectorAll('.star-inp').forEach((s,i)=>s.classList.toggle('active',i<Math.round(currentStars)));
-  // preview image
   if(p?.imageBase64){currentImgBase64=p.imageBase64;updateImgPreview(p.imageBase64);}
   else if(p?.image){updateImgPreview(p.image);}
   else{document.getElementById('img-preview-wrap').innerHTML=`<span id="img-preview-emoji">${p?.icon||'📦'}</span>`;}
@@ -575,7 +638,7 @@ function addFeature(){
   document.getElementById('features-list').appendChild(div);
 }
 
-function saveProduct(){
+async function saveProduct(){
   const name=document.getElementById('p-name').value.trim();
   if(!name){showToast('أدخل اسم المنتج');return;}
   const features=[...document.querySelectorAll('#features-list .field-input')].map(i=>i.value.trim()).filter(Boolean);
@@ -593,17 +656,34 @@ function saveProduct(){
     reviewCount:parseInt(document.getElementById('p-review-count').value)||0,
     features
   };
-  if(editingProdId){const idx=products.findIndex(x=>x.id===editingProdId);products[idx]={...products[idx],...data};}
-  else{data.id=Date.now();products.push(data);}
-  saveData();renderProducts();markDirty();
-  closeModal('prod-modal');
-  showToast(editingProdId?'✅ تم تعديل المنتج':'✅ تم إضافة المنتج');
+  try{
+    if(editingProdId){
+      const idx=products.findIndex(x=>x.id===editingProdId);
+      data.id=editingProdId;
+      data.order=products[idx].order??idx;
+      await setDoc(doc(db,'products',String(editingProdId)), data);
+      products[idx]={...products[idx],...data};
+    }else{
+      const newId=Date.now();
+      data.id=newId;
+      data.order=products.length;
+      await setDoc(doc(db,'products',String(newId)), data);
+      products.push({...data,_docId:String(newId)});
+    }
+    renderProducts();
+    closeModal('prod-modal');
+    showToast(editingProdId?'✅ تم تعديل المنتج':'✅ تم إضافة المنتج');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
-function deleteProduct(id){
+async function deleteProduct(id){
   if(!confirm('تأكيد حذف المنتج؟'))return;
-  products=products.filter(p=>p.id!==id);saveData();renderProducts();markDirty();
-  showToast('🗑️ تم حذف المنتج');
+  try{
+    await deleteDoc(doc(db,'products',String(id)));
+    products=products.filter(p=>p.id!==id);
+    renderProducts();
+    showToast('🗑️ تم حذف المنتج');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
 // ===== CATS MODAL =====
@@ -617,24 +697,40 @@ function openCatModal(id=null){
   document.getElementById('c-id').disabled=!!id;
   document.getElementById('cat-modal').classList.add('open');
 }
-function saveCat(){
+async function saveCat(){
   const id=document.getElementById('c-id').value.trim();
   const label=document.getElementById('c-label').value.trim();
   if(!id||!label){showToast('أكمل البيانات');return;}
-  const data={id,label,icon:document.getElementById('c-icon').value};
-  if(editingCatId){const idx=categories.findIndex(x=>x.id===editingCatId);categories[idx]=data;}
-  else{if(categories.find(x=>x.id===id)){showToast('المعرّف موجود مسبقاً');return;}categories.push(data);}
-  saveData();renderCats();markDirty();closeModal('cat-modal');
-  showToast('✅ تم حفظ الفئة');
+  const icon=document.getElementById('c-icon').value;
+  try{
+    if(editingCatId){
+      const idx=categories.findIndex(x=>x.id===editingCatId);
+      const data={id,label,icon,order:categories[idx].order??idx};
+      await setDoc(doc(db,'categories',editingCatId), data);
+      categories[idx]=data;
+    }else{
+      if(categories.find(x=>x.id===id)){showToast('المعرّف موجود مسبقاً');return;}
+      const data={id,label,icon,order:categories.length};
+      await setDoc(doc(db,'categories',id), data);
+      categories.push(data);
+    }
+    renderCats();
+    closeModal('cat-modal');
+    showToast('✅ تم حفظ الفئة');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
-function deleteCat(id){
+async function deleteCat(id){
   if(!confirm('تأكيد حذف الفئة؟'))return;
-  categories=categories.filter(c=>c.id!==id);saveData();renderCats();markDirty();
-  showToast('🗑️ تم حذف الفئة');
+  try{
+    await deleteDoc(doc(db,'categories',id));
+    categories=categories.filter(c=>c.id!==id);
+    renderCats();
+    showToast('🗑️ تم حذف الفئة');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
 // ===== SETTINGS =====
-function saveSettings(){
+async function saveSettings(){
   settings={
     site_name:document.getElementById('s-name').value,
     site_tagline:document.getElementById('s-tagline').value,
@@ -649,43 +745,47 @@ function saveSettings(){
     accent_color:document.getElementById('s-accent').value,
     footer_text:document.getElementById('s-footer').value,
   };
-  saveData();markDirty();showToast('✅ تم حفظ الإعدادات');
+  try{
+    await setDoc(doc(db,'settings','site'), settings);
+    showToast('✅ تم حفظ الإعدادات');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
 // ===== DRAG & DROP =====
-let dragSrcId=null,dragType=null;
 function dragStart(e){dragSrcId=e.currentTarget.dataset.id;dragType=e.currentTarget.dataset.type;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
 function dragOver(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
 function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
 function dragEnd(e){document.querySelectorAll('.dragging,.drag-over').forEach(el=>el.classList.remove('dragging','drag-over'));}
-function dropItem(e){
+async function dropItem(e){
   e.preventDefault();
   const targetId=e.currentTarget.dataset.id;
   if(dragSrcId===targetId)return;
-  if(dragType==='product'){
-    const from=products.findIndex(p=>String(p.id)===dragSrcId);
-    const to=products.findIndex(p=>String(p.id)===targetId);
-    const [item]=products.splice(from,1);products.splice(to,0,item);
-    saveData();renderProducts();markDirty();
-  } else {
-    const from=categories.findIndex(c=>c.id===dragSrcId);
-    const to=categories.findIndex(c=>c.id===targetId);
-    const [item]=categories.splice(from,1);categories.splice(to,0,item);
-    saveData();renderCats();markDirty();
-  }
-  showToast('✅ تم تغيير الترتيب');
-}
-
-// ===== EXPORT =====
-function exportData(){
-  const text=`=== products.json ===\n${JSON.stringify(products,null,2)}\n\n=== categories.json ===\n${JSON.stringify(categories,null,2)}\n\n=== settings.json ===\n${JSON.stringify(settings,null,2)}\n\n=== reviews.json ===\n${JSON.stringify(reviews,null,2)}`;
-  navigator.clipboard.writeText(text).then(()=>showToast('✅ تم نسخ البيانات'));
+  try{
+    if(dragType==='product'){
+      const from=products.findIndex(p=>String(p.id)===dragSrcId);
+      const to=products.findIndex(p=>String(p.id)===targetId);
+      const [item]=products.splice(from,1);products.splice(to,0,item);
+      renderProducts();
+      const batch=writeBatch(db);
+      products.forEach((p,i)=>{p.order=i;batch.update(doc(db,'products',String(p.id)),{order:i});});
+      await batch.commit();
+    }else{
+      const from=categories.findIndex(c=>c.id===dragSrcId);
+      const to=categories.findIndex(c=>c.id===targetId);
+      const [item]=categories.splice(from,1);categories.splice(to,0,item);
+      renderCats();
+      const batch=writeBatch(db);
+      categories.forEach((c,i)=>{c.order=i;batch.update(doc(db,'categories',c.id),{order:i});});
+      await batch.commit();
+    }
+    showToast('✅ تم تغيير الترتيب');
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
 function closeModal(id){document.getElementById(id).classList.remove('open');}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
 
-// ===== INIT DATA =====
+// ===== بيانات أولية (تُستخدم فقط أول مرة لتعبئة Firestore) =====
 const INIT_PRODUCTS=[
   {id:1,name:'Netflix',category:'streaming',icon:'🎬',color:'#1a0a0a',badge:'hot',price:29,period:'/شهر',desc:'أفلام ومسلسلات بلا حدود بجودة 4K',features:['4K Ultra HD','4 شاشات','تحميل للجوال'],rating:4.9,reviewCount:234,image:'',imageBase64:''},
   {id:2,name:'Spotify Premium',category:'music',icon:'🎵',color:'#0a1a0a',badge:'',price:19,period:'/شهر',desc:'موسيقى وبودكاست بدون إعلانات',features:['بدون إعلانات','تحميل أغاني','صوت عالي الجودة'],rating:4.8,reviewCount:189,image:'',imageBase64:''},
@@ -719,6 +819,14 @@ const INIT_REVIEWS=[
   {id:3,name:'عبدالله القحطاني',avatar:'ع',stars:4,text:'تجربة شراء سلسة جداً.',date:'منذ شهر',productId:'',visible:true},
   {id:4,name:'نورة الشمري',avatar:'ن',stars:5,text:'أفضل متجر للاشتراكات الرقمية!',date:'منذ شهر',productId:'',visible:true}
 ];
+
+// ===== تعريض الدوال للـ window (لأن onclick بالـ HTML يحتاجها global) =====
+Object.assign(window,{
+  doLogin,doLogout,switchTab,openProductModal,deleteProduct,openCatModal,deleteCat,
+  addNewReview,deleteReview,updateReviewField,setReviewStars,saveSettings,markDirty,
+  handleImageFile,previewImageUrl,setStars,updateStarsFromInput,addFeature,saveProduct,
+  saveCat,closeModal,dragStart,dragOver,dragLeave,dragEnd,dropItem
+});
 </script>
 </body>
 </html>
