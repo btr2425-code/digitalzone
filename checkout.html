@@ -95,6 +95,8 @@
   .success-sub{font-size:16px;color:var(--muted);max-width:360px;line-height:1.6;margin-bottom:16px;}
   .success-order-id{font-family:'Space Mono',monospace;font-size:13px;background:var(--surface2);border:1px solid var(--border2);padding:8px 20px;border-radius:8px;color:var(--muted);margin-bottom:32px;}
   .btn-home{background:var(--accent);color:white;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;text-decoration:none;display:inline-block;}
+  .success-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .btn-track{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;text-decoration:none;display:inline-block;}
   .spinner{display:none;width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg)}}
   .site-footer{border-top:1px solid var(--border);padding:32px 1.5rem;margin-top:20px;}
@@ -288,9 +290,12 @@
 <div class="success-overlay" id="success-overlay">
   <div class="success-icon">🎉</div>
   <div class="success-title">تم الدفع بنجاح!</div>
-  <div class="success-sub">شكراً لثقتك بـ DigitalZone. سيتم تفعيل اشتراكاتك خلال دقائق.</div>
+  <div class="success-sub">شكراً لثقتك بـ DigitalZone. طلبك الآن قيد المعالجة وسيتم تفعيل اشتراكاتك خلال دقائق.</div>
   <div class="success-order-id" id="order-id-display">رقم الطلب: #DZ-000000</div>
-  <a href="/" class="btn-home">العودة للمتجر</a>
+  <div class="success-actions">
+    <a href="/orders.html" class="btn-track">📋 تتبع طلبي</a>
+    <a href="/" class="btn-home">العودة للمتجر</a>
+  </div>
 </div>
 
 <script type="module">
@@ -326,7 +331,7 @@ window.__saveOrderToFirestore = async function(orderId, items, total){
       userPhone: fbUser.phoneNumber||'',
       items,
       total,
-      status:'مكتمل',
+      status:'قيد المعالجة',
       createdAt: new Date().toISOString()
     };
     await addDoc(collection(db,'orders'), order);

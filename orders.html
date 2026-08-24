@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>طلباتي — DigitalZone</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#080b12;--surface:#0f1420;--surface2:#161c2e;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--accent:#3b82f6;--accent2:#6366f1;--text:#f0f2f8;--muted:#7a82a0;--success:#22c55e;--error:#ef4444;--warn:#f59e0b;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',sans-serif;min-height:100vh;}
+  nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-family:'Space Mono',monospace;font-size:18px;color:var(--text);text-decoration:none;}
+  .logo span{color:var(--accent);}
+  .back-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;text-decoration:none;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
+  .back-btn:hover{color:var(--text);}
+
+  .wrap{max-width:760px;margin:0 auto;padding:40px 1.5rem 60px;}
+  .page-header{margin-bottom:28px;}
+  .page-header h1{font-size:26px;font-weight:700;margin-bottom:4px;}
+  .page-header p{color:var(--muted);font-size:14px;}
+
+  .state-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:50px 24px;text-align:center;}
+  .state-box .icon{font-size:44px;margin-bottom:14px;}
+  .state-box h3{font-size:16px;font-weight:600;margin-bottom:8px;}
+  .state-box p{color:var(--muted);font-size:13px;margin-bottom:20px;}
+  .btn-primary-lg{background:var(--accent);color:white;border:none;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;text-decoration:none;display:inline-block;}
+
+  .order-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;}
+  .oc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:12px;flex-wrap:wrap;}
+  .oc-id{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;}
+  .oc-date{font-size:12px;color:var(--muted);margin-top:4px;}
+  .oc-status{font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;white-space:nowrap;}
+  .st-pending{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);color:#fbbf24;}
+  .st-done{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);color:#4ade80;}
+  .st-cancelled{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.35);color:#f87171;}
+
+  .progress-track{display:flex;align-items:center;margin-bottom:18px;}
+  .p-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative;}
+  .p-dot{width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);z-index:1;}
+  .p-label{font-size:11px;color:var(--muted);text-align:center;}
+  .p-line{position:absolute;top:12px;right:50%;width:100%;height:2px;background:var(--border2);z-index:0;}
+  .p-step:first-child .p-line{display:none;}
+  .p-step.filled .p-dot{background:rgba(59,130,246,0.15);border-color:var(--accent);color:var(--accent);}
+  .p-step.filled .p-label{color:var(--text);}
+  .p-step.filled .p-line{background:var(--accent);}
+  .p-step.current .p-dot{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .progress-track.cancelled .p-step .p-dot{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.35);color:#f87171;}
+  .progress-track.cancelled .p-line{background:rgba(239,68,68,0.35);}
+
+  .oc-items{border-top:1px solid var(--border);padding-top:14px;display:flex;flex-direction:column;gap:10px;}
+  .oc-item{display:flex;align-items:center;gap:10px;}
+  .oc-icon{font-size:18px;width:32px;height:32px;background:var(--surface2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .oc-item-name{font-size:13px;flex:1;}
+  .oc-item-price{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);}
+  .oc-total{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);margin-top:14px;padding-top:14px;}
+  .oc-total-label{font-size:13px;color:var(--muted);}
+  .oc-total-num{font-family:'Space Mono',monospace;font-size:17px;font-weight:700;color:var(--accent);}
+
+  .site-footer{border-top:1px solid var(--border);padding:32px 1.5rem;margin-top:20px;}
+  .footer-inner{max-width:760px;margin:0 auto;text-align:center;}
+  .footer-copy{font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo">Digital<span>Zone</span></a>
+  <a href="/" class="back-btn">← العودة للمتجر</a>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <h1>📋 طلباتي</h1>
+    <p>تابع حالة اشتراكاتك وطلباتك السابقة</p>
+  </div>
+
+  <div id="content">
+    <div class="state-box"><div class="icon">⏳</div><h3>جاري التحميل...</h3></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-copy">© 2025 DigitalZone — جميع الحقوق محفوظة</div>
+  </div>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",
+  authDomain: "digitalzone-6a39a.firebaseapp.com",
+  projectId: "digitalzone-6a39a",
+  storageBucket: "digitalzone-6a39a.firebasestorage.app",
+  messagingSenderId: "607143644878",
+  appId: "1:607143644878:web:9f0e734d2e960511c58a9f"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const content = document.getElementById('content');
+
+function showLoggedOut(){
+  content.innerHTML = `
+    <div class="state-box">
+      <div class="icon">🔒</div>
+      <h3>سجّل الدخول لعرض طلباتك</h3>
+      <p>تحتاج لتسجيل الدخول بنفس الحساب اللي سويت فيه الشراء</p>
+      <a href="/" class="btn-primary-lg">الذهاب لتسجيل الدخول</a>
+    </div>`;
+}
+
+function showEmpty(){
+  content.innerHTML = `
+    <div class="state-box">
+      <div class="icon">🛒</div>
+      <h3>ما عندك طلبات بعد</h3>
+      <p>لما تشتري أي اشتراك بيظهر هنا مع حالة التفعيل</p>
+      <a href="/" class="btn-primary-lg">تصفح المنتجات</a>
+    </div>`;
+}
+
+function fmtDate(iso){
+  try{
+    return new Date(iso).toLocaleDateString('ar-SA',{day:'numeric',month:'long',year:'numeric'});
+  }catch(e){return iso||'';}
+}
+
+function statusMeta(status){
+  if(status==='مكتمل') return {cls:'st-done', step:2};
+  if(status==='ملغي') return {cls:'st-cancelled', step:-1};
+  return {cls:'st-pending', step:1}; // قيد المعالجة (default)
+}
+
+function renderProgress(status){
+  const meta = statusMeta(status);
+  if(meta.step===-1){
+    return `<div class="progress-track cancelled">
+      <div class="p-step filled"><div class="p-line"></div><div class="p-dot">✓</div><div class="p-label">تم الطلب</div></div>
+      <div class="p-step current"><div class="p-line"></div><div class="p-dot">✕</div><div class="p-label">ملغي</div></div>
+    </div>`;
+  }
+  const steps = [
+    {label:'تم الطلب', idx:0},
+    {label:'قيد المعالجة', idx:1},
+    {label:'مكتمل', idx:2}
+  ];
+  return `<div class="progress-track">
+    ${steps.map(s=>{
+      const filled = s.idx <= meta.step;
+      const current = s.idx === meta.step;
+      return `<div class="p-step ${filled?'filled':''} ${current?'current':''}"><div class="p-line"></div><div class="p-dot">${filled&&s.idx<meta.step?'✓':(s.idx+1)}</div><div class="p-label">${s.label}</div></div>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderOrders(orders){
+  if(!orders.length){ showEmpty(); return; }
+  orders.sort((a,b)=> new Date(b.createdAt||0) - new Date(a.createdAt||0));
+  content.innerHTML = orders.map(o=>{
+    const meta = statusMeta(o.status);
+    const itemsHtml = (o.items||[]).map(it=>`
+      <div class="oc-item">
+        <div class="oc-icon">${it.icon||'📦'}</div>
+        <div class="oc-item-name">${it.name}${it.qty>1?' × '+it.qty:''}</div>
+        <div class="oc-item-price">${(it.price||0)*(it.qty||1)} ر.س</div>
+      </div>`).join('');
+    return `
+    <div class="order-card">
+      <div class="oc-top">
+        <div>
+          <div class="oc-id">#${o.orderId||''}</div>
+          <div class="oc-date">${fmtDate(o.createdAt)}</div>
+        </div>
+        <div class="oc-status ${meta.cls}">${o.status||'قيد المعالجة'}</div>
+      </div>
+      ${renderProgress(o.status)}
+      <div class="oc-items">${itemsHtml}</div>
+      <div class="oc-total">
+        <div class="oc-total-label">المجموع</div>
+        <div class="oc-total-num">${o.total||0} ر.س</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+onAuthStateChanged(auth, async (user)=>{
+  if(!user){ showLoggedOut(); return; }
+  try{
+    const snap = await getDocs(query(collection(db,'orders'), where('userId','==', user.uid)));
+    const orders = snap.docs.map(d=>d.data());
+    renderOrders(orders);
+  }catch(e){
+    content.innerHTML = `<div class="state-box"><div class="icon">⚠️</div><h3>صار خطأ بتحميل الطلبات</h3><p>${e.message}</p></div>`;
+    console.error(e);
+  }
+});
+</script>
+</body>
+</html>

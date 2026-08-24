@@ -35,7 +35,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 
 .container{max-width:1100px;margin:0 auto;padding:32px 1.5rem 80px;}
 
-.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--border);}
+.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 .tab{background:none;border:none;color:var(--muted);padding:10px 18px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;}
 .tab:hover{color:var(--text);}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent);}
@@ -139,6 +139,26 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
 .sync-badge{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--success);}
 
+.order-table-head{display:grid;grid-template-columns:110px 1fr 1.4fr 90px 100px 140px;gap:10px;padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);font-weight:500;}
+.order-row{display:grid;grid-template-columns:110px 1fr 1.4fr 90px 100px 140px;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);align-items:center;}
+.order-row:last-child{border-bottom:none;}
+.order-row:hover{background:rgba(255,255,255,0.02);}
+.ord-id{font-family:'Space Mono',monospace;font-size:12px;color:var(--text);}
+.ord-cust-name{font-size:13px;font-weight:500;}
+.ord-cust-email{font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ord-items{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ord-date{font-size:12px;color:var(--muted);}
+.ord-status-select{padding:6px 10px;font-size:12px;font-weight:600;cursor:pointer;}
+.ord-pending{color:#fbbf24;border-color:rgba(251,191,36,0.35)!important;background:rgba(251,191,36,0.08)!important;}
+.ord-done{color:#4ade80;border-color:rgba(34,197,94,0.35)!important;background:rgba(34,197,94,0.08)!important;}
+.ord-cancelled{color:#f87171;border-color:rgba(239,68,68,0.35)!important;background:rgba(239,68,68,0.08)!important;}
+
+@media(max-width:640px){
+  .order-table-head{display:none;}
+  .order-row{grid-template-columns:1fr;gap:6px;padding:14px 16px;}
+  .ord-items{white-space:normal;}
+}
+
 @media(max-width:640px){
   .table-head,.table-row{grid-template-columns:24px 44px 1fr 80px;}
   .h-cat,.row-cat,.h-badge,.row-badge{display:none;}
@@ -173,6 +193,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
       <button class="tab active" onclick="switchTab('products',this)">📦 المنتجات</button>
       <button class="tab" onclick="switchTab('categories',this)">🗂️ الفئات</button>
       <button class="tab" onclick="switchTab('reviews',this)">⭐ التقييمات</button>
+      <button class="tab" onclick="switchTab('orders',this)">📋 الطلبات</button>
       <button class="tab" onclick="switchTab('settings',this)">⚙️ الإعدادات</button>
     </div>
 
@@ -207,6 +228,19 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
         <button class="btn-sm btn-primary" onclick="addNewReview()">+ تقييم جديد</button>
       </div>
       <div class="reviews-wrap" id="reviews-list"></div>
+    </div>
+
+    <div class="tab-content" id="tab-orders">
+      <div class="section-header">
+        <div class="section-title">الطلبات <span id="order-count" style="color:var(--muted);font-size:14px;font-weight:400;"></span></div>
+        <div id="order-revenue" style="font-size:13px;color:var(--muted);"></div>
+      </div>
+      <div class="table-wrap">
+        <div class="order-table-head">
+          <div>رقم الطلب</div><div>العميل</div><div>المنتجات</div><div>المبلغ</div><div>التاريخ</div><div>الحالة</div>
+        </div>
+        <div id="orders-list"></div>
+      </div>
     </div>
 
     <div class="tab-content" id="tab-settings">
@@ -353,7 +387,7 @@ const db = getFirestore(app);
 // ⚠️ غيّر هذا الإيميل ليطابق حساب الأدمن اللي تسويه في Firebase Authentication
 const ADMIN_EMAIL = 'admin@digitalzone.sa';
 
-let products=[], categories=[], settings={}, reviews=[];
+let products=[], categories=[], settings={}, reviews=[], orders=[];
 let editingProdId=null, editingCatId=null, currentStars=5, currentImgBase64='';
 let dragSrcId=null, dragType=null;
 
@@ -405,10 +439,22 @@ async function loadData(){
     const settingsSnap = await getDoc(doc(db,'settings','site'));
     settings = settingsSnap.exists() ? settingsSnap.data() : INIT_SETTINGS;
 
+    await loadOrders();
+
     renderAll();
   }catch(e){
     showToast('❌ خطأ بالاتصال بـ Firestore: '+e.message);
     console.error(e);
+  }
+}
+
+async function loadOrders(){
+  try{
+    const ordSnap = await getDocs(query(collection(db,'orders'), orderBy('createdAt','desc')));
+    orders = ordSnap.docs.map(d=>({...d.data(), _docId:d.id}));
+  }catch(e){
+    console.error('orders load error:', e);
+    orders = [];
   }
 }
 
@@ -437,10 +483,11 @@ function switchTab(name,el){
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('tab-'+name).classList.add('active');
+  if(name==='orders') loadOrders().then(renderOrders);
 }
 
 // ===== RENDER =====
-function renderAll(){renderProducts();renderCats();renderReviews();renderSettings();}
+function renderAll(){renderProducts();renderCats();renderReviews();renderSettings();renderOrders();}
 
 function getThumb(p){
   if(p.imageBase64) return `<img src="${p.imageBase64}" alt="${p.name}">`;
@@ -543,6 +590,58 @@ async function updateReviewField(i,field,value){
 async function setReviewStars(i,s){
   await updateReviewField(i,'stars',s);
   renderReviews();
+}
+
+// ===== ORDERS =====
+const ORDER_STATUSES = ['قيد المعالجة','مكتمل','ملغي'];
+function statusClass(s){
+  if(s==='مكتمل') return 'ord-badge ord-done';
+  if(s==='ملغي') return 'ord-badge ord-cancelled';
+  return 'ord-badge ord-pending';
+}
+function fmtOrderDate(iso){
+  try{
+    const d=new Date(iso);
+    return d.toLocaleDateString('ar-SA',{day:'numeric',month:'short',year:'numeric'});
+  }catch(e){return iso||'';}
+}
+function renderOrders(){
+  document.getElementById('order-count').textContent='('+orders.length+')';
+  const totalRevenue=orders.filter(o=>o.status!=='ملغي').reduce((s,o)=>s+(o.total||0),0);
+  document.getElementById('order-revenue').textContent='إجمالي المبيعات: '+totalRevenue+' ر.س';
+  const el=document.getElementById('orders-list');
+  if(!orders.length){
+    el.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px;">لا توجد طلبات بعد</div>';
+    return;
+  }
+  el.innerHTML=orders.map((o,i)=>{
+    const itemsStr=(o.items||[]).map(it=>it.name+(it.qty>1?' ×'+it.qty:'')).join('، ');
+    return `
+    <div class="order-row">
+      <div class="ord-id">#${o.orderId||o._docId}</div>
+      <div>
+        <div class="ord-cust-name">${o.userName||'—'}</div>
+        <div class="ord-cust-email">${o.userEmail||''}</div>
+      </div>
+      <div class="ord-items" title="${itemsStr}">${itemsStr}</div>
+      <div class="row-price">${o.total||0} ر.س</div>
+      <div class="ord-date">${fmtOrderDate(o.createdAt)}</div>
+      <div>
+        <select class="field-input ord-status-select ${statusClass(o.status)}" onchange="updateOrderStatus(${i},this.value)">
+          ${ORDER_STATUSES.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function updateOrderStatus(i,newStatus){
+  const o=orders[i];
+  o.status=newStatus;
+  try{
+    await updateDoc(doc(db,'orders',o._docId), {status:newStatus});
+    renderOrders();
+    showToast('✅ تم تحديث حالة الطلب #'+(o.orderId||o._docId));
+  }catch(e){showToast('❌ خطأ: '+e.message);}
 }
 
 function renderSettings(){
@@ -825,7 +924,7 @@ Object.assign(window,{
   doLogin,doLogout,switchTab,openProductModal,deleteProduct,openCatModal,deleteCat,
   addNewReview,deleteReview,updateReviewField,setReviewStars,saveSettings,markDirty,
   handleImageFile,previewImageUrl,setStars,updateStarsFromInput,addFeature,saveProduct,
-  saveCat,closeModal,dragStart,dragOver,dragLeave,dragEnd,dropItem
+  saveCat,closeModal,dragStart,dragOver,dragLeave,dragEnd,dropItem,updateOrderStatus
 });
 </script>
 </body>

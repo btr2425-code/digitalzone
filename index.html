@@ -263,7 +263,7 @@ onAuthStateChanged(auth, user => {
   if (user) {
     const name = user.displayName || user.email || user.phoneNumber || 'حسابي';
     const short = name.length > 12 ? name.slice(0,12)+'...' : name;
-    el.innerHTML = `<div class="user-badge">👤 ${short}<div class="user-menu"><span class="user-menu-item">📦 طلباتي</span><span class="user-menu-item danger" id="logout-btn">تسجيل خروج</span></div></div>`;
+    el.innerHTML = `<div class="user-badge">👤 ${short}<div class="user-menu"><a href="/orders.html" class="user-menu-item">📦 طلباتي</a><span class="user-menu-item danger" id="logout-btn">تسجيل خروج</span></div></div>`;
     document.getElementById('logout-btn').onclick = () => signOut(auth);
     window.__firebaseUser = user;
   } else {
