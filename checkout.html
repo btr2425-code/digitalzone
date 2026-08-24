@@ -298,6 +298,11 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init({ publicKey: "IRmQ75fHXeuJb6-Dt" });
+</script>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -337,6 +342,22 @@ window.__saveOrderToFirestore = async function(orderId, items, total){
     await addDoc(collection(db,'orders'), order);
     // نحفظ رقم الطلب داخل بروفايل المستخدم (setDoc مع merge حتى لو المستند غير موجود بعد)
     await setDoc(doc(db,'users',fbUser.uid), { orders: arrayUnion(orderId) }, { merge:true });
+
+    // إشعار إيميل بالطلب الجديد (لا يوقف عملية الشراء لو فشل)
+    try{
+      const itemsList = items.map(it => `${it.name}${it.qty>1?' × '+it.qty:''} — ${it.price*(it.qty||1)} ر.س`).join('\n');
+      await emailjs.send('service_47nr925','template_0pkpf1e', {
+        to_email: 'btr2425@gmail.com',
+        order_id: orderId,
+        order_date: new Date().toLocaleString('ar-SA'),
+        customer_name: fbUser.displayName || 'عميل',
+        customer_email: fbUser.email || fbUser.phoneNumber || '—',
+        items_list: itemsList,
+        total: total
+      });
+    }catch(mailErr){
+      console.error('email notify error:', mailErr);
+    }
   }catch(e){
     console.error('order save error:', e);
   }
