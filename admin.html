@@ -159,6 +159,25 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
   .ord-items{white-space:normal;}
 }
 
+.order-stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px;}
+.order-stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;}
+.order-stat-num{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;}
+.order-stat-label{font-size:11px;color:var(--muted);margin-top:4px;}
+.order-stat-card.st-total .order-stat-num{color:var(--text);}
+.order-stat-card.st-pending .order-stat-num{color:#fbbf24;}
+.order-stat-card.st-done .order-stat-num{color:#4ade80;}
+.order-stat-card.st-cancelled .order-stat-num{color:#f87171;}
+.order-stat-card.st-revenue .order-stat-num{color:var(--accent);}
+
+.order-filters{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.order-search-input{flex:1;min-width:180px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;font-family:inherit;outline:none;}
+.order-search-input:focus{border-color:var(--accent);}
+.order-filter-select{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;font-family:inherit;outline:none;cursor:pointer;}
+
+@media(max-width:768px){
+  .order-stats-grid{grid-template-columns:repeat(2,1fr);}
+}
+
 @media(max-width:640px){
   .table-head,.table-row{grid-template-columns:24px 44px 1fr 80px;}
   .h-cat,.row-cat,.h-badge,.row-badge{display:none;}
@@ -233,7 +252,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,0.92);backdrop-fil
     <div class="tab-content" id="tab-orders">
       <div class="section-header">
         <div class="section-title">الطلبات <span id="order-count" style="color:var(--muted);font-size:14px;font-weight:400;"></span></div>
-        <div id="order-revenue" style="font-size:13px;color:var(--muted);"></div>
+      </div>
+      <div class="order-stats-grid">
+        <div class="order-stat-card st-total"><div class="order-stat-num" id="stat-total">0</div><div class="order-stat-label">إجمالي الطلبات</div></div>
+        <div class="order-stat-card st-pending"><div class="order-stat-num" id="stat-pending">0</div><div class="order-stat-label">قيد المعالجة</div></div>
+        <div class="order-stat-card st-done"><div class="order-stat-num" id="stat-done">0</div><div class="order-stat-label">مكتملة</div></div>
+        <div class="order-stat-card st-cancelled"><div class="order-stat-num" id="stat-cancelled">0</div><div class="order-stat-label">ملغاة</div></div>
+        <div class="order-stat-card st-revenue"><div class="order-stat-num" id="stat-revenue">0</div><div class="order-stat-label">إجمالي المبيعات (ر.س)</div></div>
+      </div>
+      <div class="order-filters">
+        <input class="order-search-input" id="order-search" placeholder="🔍 ابحث برقم الطلب، اسم العميل، أو الإيميل..." oninput="onOrderSearch(this.value)">
+        <select class="order-filter-select" id="order-status-filter" onchange="onOrderStatusFilter(this.value)">
+          <option value="all">كل الحالات</option>
+          <option value="قيد المعالجة">قيد المعالجة</option>
+          <option value="مكتمل">مكتمل</option>
+          <option value="ملغي">ملغي</option>
+        </select>
       </div>
       <div class="table-wrap">
         <div class="order-table-head">
@@ -390,6 +424,7 @@ const ADMIN_EMAIL = 'admin@digitalzone.sa';
 let products=[], categories=[], settings={}, reviews=[], orders=[];
 let editingProdId=null, editingCatId=null, currentStars=5, currentImgBase64='';
 let dragSrcId=null, dragType=null;
+let orderStatusFilter='all', orderSearchTerm='';
 
 // ===== AUTH =====
 async function doLogin(){
@@ -605,16 +640,45 @@ function fmtOrderDate(iso){
     return d.toLocaleDateString('ar-SA',{day:'numeric',month:'short',year:'numeric'});
   }catch(e){return iso||'';}
 }
+function onOrderSearch(v){orderSearchTerm=v.trim().toLowerCase();renderOrders();}
+function onOrderStatusFilter(v){orderStatusFilter=v;renderOrders();}
+function getFilteredOrders(){
+  return orders.filter(o=>{
+    if(orderStatusFilter!=='all' && (o.status||'قيد المعالجة')!==orderStatusFilter) return false;
+    if(orderSearchTerm){
+      const hay=((o.orderId||'')+' '+(o.userName||'')+' '+(o.userEmail||'')).toLowerCase();
+      if(!hay.includes(orderSearchTerm)) return false;
+    }
+    return true;
+  });
+}
+function renderOrderStats(){
+  const total=orders.length;
+  const pending=orders.filter(o=>(o.status||'قيد المعالجة')==='قيد المعالجة').length;
+  const done=orders.filter(o=>o.status==='مكتمل').length;
+  const cancelled=orders.filter(o=>o.status==='ملغي').length;
+  const revenue=orders.filter(o=>o.status!=='ملغي').reduce((s,o)=>s+(o.total||0),0);
+  document.getElementById('stat-total').textContent=total;
+  document.getElementById('stat-pending').textContent=pending;
+  document.getElementById('stat-done').textContent=done;
+  document.getElementById('stat-cancelled').textContent=cancelled;
+  document.getElementById('stat-revenue').textContent=revenue.toLocaleString('en-US');
+}
 function renderOrders(){
-  document.getElementById('order-count').textContent='('+orders.length+')';
-  const totalRevenue=orders.filter(o=>o.status!=='ملغي').reduce((s,o)=>s+(o.total||0),0);
-  document.getElementById('order-revenue').textContent='إجمالي المبيعات: '+totalRevenue+' ر.س';
+  renderOrderStats();
+  const filtered=getFilteredOrders();
+  document.getElementById('order-count').textContent='('+filtered.length+(filtered.length!==orders.length?' من '+orders.length:'')+')';
   const el=document.getElementById('orders-list');
   if(!orders.length){
     el.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px;">لا توجد طلبات بعد</div>';
     return;
   }
-  el.innerHTML=orders.map((o,i)=>{
+  if(!filtered.length){
+    el.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted);font-size:13px;">لا توجد نتائج مطابقة</div>';
+    return;
+  }
+  el.innerHTML=filtered.map((o)=>{
+    const i=orders.indexOf(o);
     const itemsStr=(o.items||[]).map(it=>it.name+(it.qty>1?' ×'+it.qty:'')).join('، ');
     return `
     <div class="order-row">
@@ -628,7 +692,7 @@ function renderOrders(){
       <div class="ord-date">${fmtOrderDate(o.createdAt)}</div>
       <div>
         <select class="field-input ord-status-select ${statusClass(o.status)}" onchange="updateOrderStatus(${i},this.value)">
-          ${ORDER_STATUSES.map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}
+          ${ORDER_STATUSES.map(s=>`<option value="${s}" ${(o.status||'قيد المعالجة')===s?'selected':''}>${s}</option>`).join('')}
         </select>
       </div>
     </div>`;
@@ -924,7 +988,8 @@ Object.assign(window,{
   doLogin,doLogout,switchTab,openProductModal,deleteProduct,openCatModal,deleteCat,
   addNewReview,deleteReview,updateReviewField,setReviewStars,saveSettings,markDirty,
   handleImageFile,previewImageUrl,setStars,updateStarsFromInput,addFeature,saveProduct,
-  saveCat,closeModal,dragStart,dragOver,dragLeave,dragEnd,dropItem,updateOrderStatus
+  saveCat,closeModal,dragStart,dragOver,dragLeave,dragEnd,dropItem,updateOrderStatus,
+  onOrderSearch,onOrderStatusFilter
 });
 </script>
 </body>
