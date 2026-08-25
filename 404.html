@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الصفحة غير موجودة — DigitalZone</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#080b12;--surface:#0f1420;--surface2:#161c2e;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--accent:#3b82f6;--accent2:#6366f1;--text:#f0f2f8;--muted:#7a82a0;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;overflow:hidden;position:relative;}
+  body::before{content:'';position:fixed;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(59,130,246,0.12) 0%,transparent 70%);pointer-events:none;}
+
+  .wrap{text-align:center;max-width:440px;position:relative;z-index:1;}
+  .logo{font-family:'Space Mono',monospace;font-size:18px;margin-bottom:40px;}
+  .logo span{color:var(--accent);}
+
+  .code{font-family:'Space Mono',monospace;font-size:clamp(64px,18vw,96px);font-weight:700;line-height:1;letter-spacing:-2px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
+  .glitch-icon{font-size:40px;margin-bottom:20px;display:inline-block;animation:float 3s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(-4deg)}}
+
+  h1{font-size:20px;font-weight:600;margin-bottom:10px;}
+  p{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:32px;}
+
+  .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .btn-home{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border:none;padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:filter 0.2s;}
+  .btn-home:hover{filter:brightness(1.1);}
+  .btn-support{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:13px 24px;border-radius:10px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}
+  .btn-support:hover{border-color:var(--accent);color:var(--accent);}
+
+  @media(max-width:480px){
+    .actions{flex-direction:column;}
+    .btn-home,.btn-support{width:100%;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="logo">Digital<span>Zone</span></div>
+  <div class="glitch-icon">🛰️</div>
+  <div class="code">404</div>
+  <h1>هذي الصفحة مو موجودة</h1>
+  <p>يمكن الرابط تغيّر أو انكتب غلط. المنتجات والاشتراكات كلها تلقاها بالصفحة الرئيسية.</p>
+  <div class="actions">
+    <a href="/" class="btn-home">🏠 الرجوع للمتجر</a>
+    <a href="https://wa.me/966500000000" target="_blank" class="btn-support">💬 تواصل معنا</a>
+  </div>
+</div>
+
+</body>
+</html>
