@@ -306,7 +306,7 @@
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, getDoc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCF6foh9onJKZu_qHaK_XEX3VJS5b6OVco",
@@ -323,6 +323,26 @@ const db = getFirestore(app);
 
 let fbUser = null;
 onAuthStateChanged(auth, user => { fbUser = user; });
+
+// ===== إعادة التحقق من الأسعار الحقيقية من Firestore قبل حفظ الطلب =====
+// يمنع أي تلاعب بالسعر تم من طرف المتصفح (localStorage) ويقلل حجم البيانات المخزنة بالطلب
+window.__verifyCart = async function(rawItems){
+  const verified = [];
+  const removedNames = [];
+  for(const it of (rawItems||[])){
+    try{
+      const snap = await getDoc(doc(db,'products',String(it.id)));
+      if(!snap.exists()){ removedNames.push(it.name||('#'+it.id)); continue; }
+      const p = snap.data();
+      const qty = Math.min(Math.max(parseInt(it.qty)||1,1),20); // حد أقصى معقول للكمية
+      verified.push({ id:p.id, name:p.name, price:p.price, period:p.period||'/شهر', icon:p.icon||'📦', qty });
+    }catch(e){
+      removedNames.push(it.name||('#'+it.id));
+    }
+  }
+  const total = verified.reduce((s,it)=>s+(it.price*it.qty),0);
+  return { items:verified, total, removedNames };
+};
 
 // ===== حفظ الطلب في Firestore =====
 window.__saveOrderToFirestore = async function(orderId, items, total){
@@ -491,10 +511,24 @@ function startProcessing() {
 
 async function finishPayment() {
   const orderId = 'DZ-'+Math.random().toString(36).slice(2,8).toUpperCase();
-  const total = cartItems.reduce((s,p)=>s+(p.price*(p.qty||1)),0);
+
+  // نتحقق من الأسعار الحقيقية من Firestore بدل الثقة بما هو محفوظ بالمتصفح
+  let finalItems = cartItems, finalTotal = cartItems.reduce((s,p)=>s+(p.price*(p.qty||1)),0);
+  if (window.__verifyCart) {
+    try{
+      const verified = await window.__verifyCart(cartItems);
+      if(verified.items.length){
+        finalItems = verified.items;
+        finalTotal = verified.total;
+      }
+      if(verified.removedNames.length){
+        console.warn('تم تجاهل منتجات لم تعد متوفرة:', verified.removedNames.join('، '));
+      }
+    }catch(e){ console.error('cart verify error:', e); }
+  }
 
   if (window.__saveOrderToFirestore) {
-    await window.__saveOrderToFirestore(orderId, cartItems, total);
+    await window.__saveOrderToFirestore(orderId, finalItems, finalTotal);
   }
 
   localStorage.removeItem('dz_cart');

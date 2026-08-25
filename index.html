@@ -149,8 +149,8 @@
 <nav>
   <div class="logo">Digital<span>Zone</span></div>
   <ul class="nav-links">
-    <li><a href="#">المتجر</a></li>
-    <li><a href="#">الباقات</a></li>
+    <li><a href="/">المتجر</a></li>
+    <li><a href="#products-grid">الباقات</a></li>
   </ul>
   <div class="nav-right">
     <div id="nav-auth"></div>
@@ -258,11 +258,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 onAuthStateChanged(auth, user => {
   const el = document.getElementById('nav-auth');
   if (user) {
     const name = user.displayName || user.email || user.phoneNumber || 'حسابي';
-    const short = name.length > 12 ? name.slice(0,12)+'...' : name;
+    const short = escapeHtml(name.length > 12 ? name.slice(0,12)+'...' : name);
     el.innerHTML = `<div class="user-badge">👤 ${short}<div class="user-menu"><a href="/orders.html" class="user-menu-item">📦 طلباتي</a><span class="user-menu-item danger" id="logout-btn">تسجيل خروج</span></div></div>`;
     document.getElementById('logout-btn').onclick = () => signOut(auth);
     window.__firebaseUser = user;
@@ -394,7 +398,7 @@ function addToCart(id) {
   if(!p) return;
   const existing=cart.find(c=>c.id===p.id);
   if(existing){existing.qty=(existing.qty||1)+1;}
-  else{cart.push({...p,qty:1});}
+  else{cart.push({id:p.id,name:p.name,price:p.price,period:p.period||'/شهر',icon:p.icon||'📦',qty:1});}
   updateCartCount(); renderProducts(currentFilter);
   showToast(`✓ تم إضافة ${p.name} للسلة`);
 }

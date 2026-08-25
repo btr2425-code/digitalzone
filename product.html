@@ -241,12 +241,16 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 onAuthStateChanged(auth, user => {
   const el = document.getElementById('nav-auth');
   if(user){
     const name = user.displayName||user.email||user.phoneNumber||'حسابي';
-    const short = name.length>12?name.slice(0,12)+'...':name;
-    el.innerHTML=`<div class="user-badge">👤 ${short}<div class="user-menu"><span class="user-menu-item">📦 طلباتي</span><span class="user-menu-item danger" id="logout-btn">تسجيل خروج</span></div></div>`;
+    const short = escapeHtml(name.length>12?name.slice(0,12)+'...':name);
+    el.innerHTML=`<div class="user-badge">👤 ${short}<div class="user-menu"><a href="/orders.html" class="user-menu-item">📦 طلباتي</a><span class="user-menu-item danger" id="logout-btn">تسجيل خروج</span></div></div>`;
     document.getElementById('logout-btn').onclick=()=>signOut(auth);
     window.__firebaseUser=user;
   } else {
@@ -402,7 +406,7 @@ function addToCartOnly(id) {
   if(!p) return;
   const existing=cart.find(c=>c.id===p.id);
   if(existing){existing.qty=(existing.qty||1)+1;}
-  else{cart.push({...p,qty:1});}
+  else{cart.push({id:p.id,name:p.name,price:p.price,period:p.period||'/شهر',icon:p.icon||'📦',qty:1});}
   updateCartCount();
   if(currentProduct&&currentProduct.id==id){
     const btn=document.getElementById('btn-buy');

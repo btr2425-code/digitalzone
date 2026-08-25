@@ -679,13 +679,13 @@ function renderOrders(){
   }
   el.innerHTML=filtered.map((o)=>{
     const i=orders.indexOf(o);
-    const itemsStr=(o.items||[]).map(it=>it.name+(it.qty>1?' ×'+it.qty:'')).join('، ');
+    const itemsStr=escapeHtml((o.items||[]).map(it=>it.name+(it.qty>1?' ×'+it.qty:'')).join('، '));
     return `
     <div class="order-row">
-      <div class="ord-id">#${o.orderId||o._docId}</div>
+      <div class="ord-id">#${escapeHtml(o.orderId||o._docId)}</div>
       <div>
-        <div class="ord-cust-name">${o.userName||'—'}</div>
-        <div class="ord-cust-email">${o.userEmail||''}</div>
+        <div class="ord-cust-name">${escapeHtml(o.userName||'—')}</div>
+        <div class="ord-cust-email">${escapeHtml(o.userEmail||'')}</div>
       </div>
       <div class="ord-items" title="${itemsStr}">${itemsStr}</div>
       <div class="row-price">${o.total||0} ر.س</div>
@@ -725,6 +725,10 @@ function renderSettings(){
 }
 
 function getCatLabel(id){const c=categories.find(x=>x.id===id);return c?c.icon+' '+c.label:id;}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
 // ===== IMAGE HANDLING =====
 function handleImageFile(input){
